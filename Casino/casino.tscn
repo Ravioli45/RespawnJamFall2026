@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://d3ww4g1s5k58m"]
+
+[ext_resource type="Script" uid="uid://c7i7yhga7ro25" path="res://Casino/level_manager.gd" id="1_x58q6"]
+[ext_resource type="PackedScene" uid="uid://df22nl2e0hplc" path="res://Player/player.tscn" id="2_pvja2"]
+[ext_resource type="Texture2D" uid="uid://cgus5ea2mdf0l" path="res://Casino/floor.png" id="3_mlntv"]
+
+[sub_resource type="Environment" id="Environment_fjq73"]
+ambient_light_color = Color(1, 1, 1, 1)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_olvt3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wm55w"]
+albedo_texture = ExtResource("3_mlntv")
+uv1_triplanar = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_olvt3"]
+material = SubResource("StandardMaterial3D_wm55w")
+size = Vector2(10, 10)
+
+[sub_resource type="BoxMesh" id="BoxMesh_wm55w"]
+
+[node name="Casino" type="Node3D" unique_id=1589319923]
+script = ExtResource("1_x58q6")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1673744337]
+environment = SubResource("Environment_fjq73")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=1831718582]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 3, 0)
+light_energy = 2.0
+spot_range = 15.0
+
+[node name="Player" parent="." unique_id=1423276027 instance=ExtResource("2_pvja2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5693383, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1521385989]
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1521298434]
+shape = SubResource("WorldBoundaryShape3D_olvt3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=1217951019]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+mesh = SubResource("QuadMesh_olvt3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=628248320]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7782433, 1.0508598, -2.2570865)
+mesh = SubResource("BoxMesh_wm55w")
