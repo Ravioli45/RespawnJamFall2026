@@ -1,0 +1,51 @@
+[gd_resource type="Resource" script_class="DieData" format=3 uid="uid://c1euvvdbmchir"]
+
+[ext_resource type="Script" uid="uid://cqvc6e1fuo3ls" path="res://Weapons/Dice/face_data.gd" id="1_up1rf"]
+[ext_resource type="Script" uid="uid://3u06ynf86tg3" path="res://Weapons/Dice/die_data.gd" id="2_80sgb"]
+[ext_resource type="Texture2D" uid="uid://cugu54owoep64" path="res://Weapons/Dice/FaceTextures/face_one.png" id="2_upy0s"]
+[ext_resource type="Texture2D" uid="uid://3o0gurrvxgtf" path="res://Weapons/Dice/FaceTextures/face_two.png" id="3_ysob3"]
+[ext_resource type="Texture2D" uid="uid://xon47k0rrhy5" path="res://Weapons/Dice/FaceTextures/face_three.png" id="4_uti5c"]
+[ext_resource type="Texture2D" uid="uid://dqukiwqce8jxl" path="res://Weapons/Dice/FaceTextures/face_four.png" id="5_bew8g"]
+[ext_resource type="Texture2D" uid="uid://d13tngttl31m0" path="res://Weapons/Dice/FaceTextures/face_five.png" id="6_lf3ab"]
+[ext_resource type="Texture2D" uid="uid://dqyw2ibe4y6in" path="res://Weapons/Dice/FaceTextures/face_six.png" id="7_utb8x"]
+
+[sub_resource type="Resource" id="Resource_uti5c"]
+script = ExtResource("1_up1rf")
+value = 1
+face_texture = ExtResource("2_upy0s")
+metadata/_custom_type_script = "uid://cqvc6e1fuo3ls"
+
+[sub_resource type="Resource" id="Resource_bew8g"]
+script = ExtResource("1_up1rf")
+value = 2
+face_texture = ExtResource("3_ysob3")
+metadata/_custom_type_script = "uid://cqvc6e1fuo3ls"
+
+[sub_resource type="Resource" id="Resource_lf3ab"]
+script = ExtResource("1_up1rf")
+value = 3
+face_texture = ExtResource("4_uti5c")
+metadata/_custom_type_script = "uid://cqvc6e1fuo3ls"
+
+[sub_resource type="Resource" id="Resource_utb8x"]
+script = ExtResource("1_up1rf")
+value = 4
+face_texture = ExtResource("5_bew8g")
+metadata/_custom_type_script = "uid://cqvc6e1fuo3ls"
+
+[sub_resource type="Resource" id="Resource_ymlug"]
+script = ExtResource("1_up1rf")
+value = 5
+face_texture = ExtResource("6_lf3ab")
+metadata/_custom_type_script = "uid://cqvc6e1fuo3ls"
+
+[sub_resource type="Resource" id="Resource_85lki"]
+script = ExtResource("1_up1rf")
+value = 6
+face_texture = ExtResource("7_utb8x")
+metadata/_custom_type_script = "uid://cqvc6e1fuo3ls"
+
+[resource]
+script = ExtResource("2_80sgb")
+faces = Array[ExtResource("1_up1rf")]([SubResource("Resource_uti5c"), SubResource("Resource_bew8g"), SubResource("Resource_lf3ab"), SubResource("Resource_utb8x"), SubResource("Resource_ymlug"), SubResource("Resource_85lki")])
+metadata/_custom_type_script = "uid://3u06ynf86tg3"

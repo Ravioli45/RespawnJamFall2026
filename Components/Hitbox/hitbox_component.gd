@@ -1,10 +1,10 @@
 class_name HitboxComponent
 extends Area3D
 
-signal hit
+signal hit(hurtbox: HurtboxComponent)
 
 @export var damage: int = 1
 
-func on_hit():
+func on_hit(hurtbox: HurtboxComponent):
 	# print("hit")
-	hit.emit()
+	hit.emit(hurtbox)

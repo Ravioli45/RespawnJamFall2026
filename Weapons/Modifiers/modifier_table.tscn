@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bksgcjb7vlyha"]
+
+[ext_resource type="Script" uid="uid://cgx5c7pywgmtu" path="res://Weapons/Modifiers/modifier_table.gd" id="1_gvcnh"]
+
+[node name="ModifierTable" type="Node" unique_id=148881590]
+script = ExtResource("1_gvcnh")

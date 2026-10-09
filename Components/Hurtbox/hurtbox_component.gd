@@ -14,4 +14,4 @@ func _on_area_entered(area: Area3D) -> void:
 		if is_instance_valid(health):
 			health.take_damage(hitbox.damage)
 		#health.take_damage(hitbox.damage)
-		hitbox.on_hit()
+		hitbox.on_hit(self)

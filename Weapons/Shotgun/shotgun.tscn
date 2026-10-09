@@ -1,13 +1,111 @@
 [gd_scene format=3 uid="uid://3jkfkl5mfyjv"]
 
 [ext_resource type="Script" uid="uid://biosj5vjxw0ci" path="res://Weapons/Shotgun/shotgun.gd" id="1_c72ml"]
-[ext_resource type="PackedScene" uid="uid://clxip8xqtbyi0" path="res://Weapons/DiceBullet/dice_bullet.tscn" id="2_e1bfy"]
+[ext_resource type="PackedScene" uid="uid://clxip8xqtbyi0" path="res://Weapons/Dice/die_bullet.tscn" id="2_e1bfy"]
 [ext_resource type="PackedScene" uid="uid://s65wbfwlgqqx" path="res://ModelScenes/Shotgun.glb" id="2_lwqk7"]
+[ext_resource type="Script" uid="uid://3u06ynf86tg3" path="res://Weapons/Dice/die_data.gd" id="3_ifwlu"]
+[ext_resource type="Script" uid="uid://cqvc6e1fuo3ls" path="res://Weapons/Dice/face_data.gd" id="4_6eg5q"]
+[ext_resource type="Texture2D" uid="uid://cugu54owoep64" path="res://Weapons/Dice/FaceTextures/face_one.png" id="5_aiulw"]
+[ext_resource type="Texture2D" uid="uid://3o0gurrvxgtf" path="res://Weapons/Dice/FaceTextures/face_two.png" id="6_v04ei"]
+[ext_resource type="Texture2D" uid="uid://xon47k0rrhy5" path="res://Weapons/Dice/FaceTextures/face_three.png" id="7_lpe6n"]
+[ext_resource type="Texture2D" uid="uid://dqukiwqce8jxl" path="res://Weapons/Dice/FaceTextures/face_four.png" id="8_6sp5e"]
+[ext_resource type="Texture2D" uid="uid://d13tngttl31m0" path="res://Weapons/Dice/FaceTextures/face_five.png" id="9_rl4sf"]
+[ext_resource type="Texture2D" uid="uid://dqyw2ibe4y6in" path="res://Weapons/Dice/FaceTextures/face_six.png" id="10_uy0yp"]
 
-[node name="Shotgun" type="Node3D" unique_id=784934416]
+[sub_resource type="Resource" id="Resource_no02n"]
+script = ExtResource("4_6eg5q")
+value = 1
+face_texture = ExtResource("5_aiulw")
+metadata/_custom_type_script = "uid://cqvc6e1fuo3ls"
+
+[sub_resource type="Resource" id="Resource_6fgau"]
+script = ExtResource("4_6eg5q")
+value = 2
+face_texture = ExtResource("6_v04ei")
+metadata/_custom_type_script = "uid://cqvc6e1fuo3ls"
+
+[sub_resource type="Resource" id="Resource_kvad6"]
+script = ExtResource("4_6eg5q")
+value = 3
+face_texture = ExtResource("7_lpe6n")
+metadata/_custom_type_script = "uid://cqvc6e1fuo3ls"
+
+[sub_resource type="Resource" id="Resource_buifp"]
+script = ExtResource("4_6eg5q")
+value = 4
+face_texture = ExtResource("8_6sp5e")
+metadata/_custom_type_script = "uid://cqvc6e1fuo3ls"
+
+[sub_resource type="Resource" id="Resource_j85yk"]
+script = ExtResource("4_6eg5q")
+value = 5
+face_texture = ExtResource("9_rl4sf")
+metadata/_custom_type_script = "uid://cqvc6e1fuo3ls"
+
+[sub_resource type="Resource" id="Resource_oms4c"]
+script = ExtResource("4_6eg5q")
+value = 6
+face_texture = ExtResource("10_uy0yp")
+metadata/_custom_type_script = "uid://cqvc6e1fuo3ls"
+
+[sub_resource type="Resource" id="Resource_2am64"]
+script = ExtResource("3_ifwlu")
+faces = Array[ExtResource("4_6eg5q")]([SubResource("Resource_no02n"), SubResource("Resource_6fgau"), SubResource("Resource_kvad6"), SubResource("Resource_buifp"), SubResource("Resource_j85yk"), SubResource("Resource_oms4c")])
+metadata/_custom_type_script = "uid://3u06ynf86tg3"
+
+[sub_resource type="Resource" id="Resource_5b5cd"]
+script = ExtResource("4_6eg5q")
+value = 1
+face_texture = ExtResource("5_aiulw")
+metadata/_custom_type_script = "uid://cqvc6e1fuo3ls"
+
+[sub_resource type="Resource" id="Resource_4i01s"]
+script = ExtResource("4_6eg5q")
+value = 2
+face_texture = ExtResource("6_v04ei")
+metadata/_custom_type_script = "uid://cqvc6e1fuo3ls"
+
+[sub_resource type="Resource" id="Resource_bebg0"]
+script = ExtResource("4_6eg5q")
+value = 3
+face_texture = ExtResource("7_lpe6n")
+metadata/_custom_type_script = "uid://cqvc6e1fuo3ls"
+
+[sub_resource type="Resource" id="Resource_rqbb4"]
+script = ExtResource("4_6eg5q")
+value = 4
+face_texture = ExtResource("8_6sp5e")
+metadata/_custom_type_script = "uid://cqvc6e1fuo3ls"
+
+[sub_resource type="Resource" id="Resource_nbeli"]
+script = ExtResource("4_6eg5q")
+value = 5
+face_texture = ExtResource("9_rl4sf")
+metadata/_custom_type_script = "uid://cqvc6e1fuo3ls"
+
+[sub_resource type="Resource" id="Resource_irxtu"]
+script = ExtResource("4_6eg5q")
+value = 6
+face_texture = ExtResource("10_uy0yp")
+metadata/_custom_type_script = "uid://cqvc6e1fuo3ls"
+
+[sub_resource type="Resource" id="Resource_ho3sj"]
+script = ExtResource("3_ifwlu")
+faces = Array[ExtResource("4_6eg5q")]([SubResource("Resource_5b5cd"), SubResource("Resource_4i01s"), SubResource("Resource_bebg0"), SubResource("Resource_rqbb4"), SubResource("Resource_nbeli"), SubResource("Resource_irxtu")])
+metadata/_custom_type_script = "uid://3u06ynf86tg3"
+
+[node name="Shotgun" type="Node3D" unique_id=784934416 node_paths=PackedStringArray("reload_timer")]
 script = ExtResource("1_c72ml")
+reload_timer = NodePath("ReloadTimer")
 projectile = ExtResource("2_e1bfy")
+spread = 0.1
+dice_data = Array[ExtResource("3_ifwlu")]([SubResource("Resource_2am64"), SubResource("Resource_ho3sj")])
 
 [node name="Shotgun" parent="." unique_id=1474894985 instance=ExtResource("2_lwqk7")]
 
 [node name="ReloadTimer" type="Timer" parent="." unique_id=2112447287]
+process_callback = 0
+wait_time = 0.5
+one_shot = true
+
+[connection signal="timeout" from="ReloadTimer" to="." method="_on_reload_timeout"]
