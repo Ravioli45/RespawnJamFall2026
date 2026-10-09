@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://clxip8xqtbyi0"]
+
+[ext_resource type="Script" uid="uid://coxlp6irqmgom" path="res://Weapons/DiceBullet/dice_bullet.gd" id="1_e73ic"]
+[ext_resource type="PackedScene" uid="uid://3lracsh2m0uc" path="res://ModelScenes/Dice.glb" id="1_vm1ir"]
+[ext_resource type="Script" uid="uid://c06frpdbjghyu" path="res://Components/Velocity/velocity_component.gd" id="3_v675u"]
+[ext_resource type="PackedScene" uid="uid://bb4xkujym618n" path="res://Components/Hitbox/hitbox_component.tscn" id="4_v675u"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wm55w"]
+size = Vector3(0.1, 0.1, 0.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_olvt3"]
+size = Vector3(0.3, 0.3, 0.3)
+
+[node name="DiceBullet" type="CharacterBody3D" unique_id=2085013923]
+collision_layer = 2
+collision_mask = 28
+script = ExtResource("1_e73ic")
+speed = 10.0
+
+[node name="DiceBulletShape" type="CollisionShape3D" parent="." unique_id=788899621]
+shape = SubResource("BoxShape3D_wm55w")
+
+[node name="Dice" parent="." unique_id=1169247445 instance=ExtResource("1_vm1ir")]
+transform = Transform3D(0.19999999, 0, 0, 0, 0.19999999, 0, 0, 0, 0.19999999, 0, 0, 0)
+
+[node name="VelocityComponent" type="Node" parent="." unique_id=1225087041 node_paths=PackedStringArray("target")]
+script = ExtResource("3_v675u")
+target = NodePath("..")
+metadata/_custom_type_script = "uid://c06frpdbjghyu"
+
+[node name="HitboxComponent" parent="." unique_id=1599040273 instance=ExtResource("4_v675u")]
+collision_layer = 2
+collision_mask = 28
+
+[node name="HitboxShape" type="CollisionShape3D" parent="HitboxComponent" unique_id=1436745645]
+shape = SubResource("BoxShape3D_olvt3")
+
+[connection signal="hit" from="HitboxComponent" to="." method="_on_hit"]

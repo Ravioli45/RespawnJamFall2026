@@ -6,9 +6,12 @@ signal hurt
 @export var health: HealthComponent
 
 func _on_area_entered(area: Area3D) -> void:
+	# print("hurt")
 	hurt.emit()
 	
-	if is_instance_valid(health) and area is HitboxComponent:
+	if area is HitboxComponent:
 		var hitbox = area as HitboxComponent
-		health.take_damage(hitbox.damage)
+		if is_instance_valid(health):
+			health.take_damage(hitbox.damage)
+		#health.take_damage(hitbox.damage)
 		hitbox.on_hit()

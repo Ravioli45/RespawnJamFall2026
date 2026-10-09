@@ -2,41 +2,47 @@
 
 [ext_resource type="Script" uid="uid://ddnpm2t27na8p" path="res://Player/player.gd" id="1_l8h54"]
 [ext_resource type="Script" uid="uid://bd1oo4b6c1b01" path="res://Components/Health/health_component.gd" id="2_4ntmi"]
-[ext_resource type="Script" uid="uid://cygh0gimytpes" path="res://Components/Hurtbox/hurtbox_component.gd" id="3_btcbx"]
+[ext_resource type="PackedScene" uid="uid://3jkfkl5mfyjv" path="res://Weapons/Shotgun/shotgun.tscn" id="2_k53q1"]
 [ext_resource type="Script" uid="uid://c06frpdbjghyu" path="res://Components/Velocity/velocity_component.gd" id="4_gwnis"]
+[ext_resource type="PackedScene" uid="uid://xv5yv141ixnv" path="res://Components/Hurtbox/hurtbox_component.tscn" id="4_k53q1"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wm55w"]
 radius = 0.4
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_olvt3"]
 
-[node name="Player" type="CharacterBody3D" unique_id=1423276027 node_paths=PackedStringArray("head")]
+[node name="Player" type="CharacterBody3D" unique_id=1423276027 node_paths=PackedStringArray("head", "weapon")]
 collision_mask = 28
 script = ExtResource("1_l8h54")
 head = NodePath("Pivot")
 speed = 5.0
 jump_strength = 5.0
 mouse_sensitivity = 0.005
+weapon = NodePath("Pivot/Shotgun")
+
+[node name="PlayerShape" type="CollisionShape3D" parent="." unique_id=1811466163]
+shape = SubResource("CapsuleShape3D_wm55w")
 
 [node name="Pivot" type="Node3D" parent="." unique_id=1605941767]
 
 [node name="Camera3D" type="Camera3D" parent="Pivot" unique_id=461006806]
 fov = 90.0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1811466163]
-shape = SubResource("CapsuleShape3D_wm55w")
+[node name="Shotgun" parent="Pivot" unique_id=784934416 node_paths=PackedStringArray("projectile_spawn_position") instance=ExtResource("2_k53q1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.285, -0.135, -0.59)
+projectile_spawn_position = NodePath("../Marker3D")
+
+[node name="Marker3D" type="Marker3D" parent="Pivot" unique_id=1409274533]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 
 [node name="HealthComponent" type="Node" parent="." unique_id=883154550]
 script = ExtResource("2_4ntmi")
 metadata/_custom_type_script = "uid://bd1oo4b6c1b01"
 
-[node name="HurtboxComponent" type="Area3D" parent="." unique_id=1680049814 node_paths=PackedStringArray("health")]
-collision_mask = 12
-script = ExtResource("3_btcbx")
+[node name="HurtboxComponent" parent="." unique_id=1539489579 node_paths=PackedStringArray("health") instance=ExtResource("4_k53q1")]
 health = NodePath("../HealthComponent")
-metadata/_custom_type_script = "uid://cygh0gimytpes"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="HurtboxComponent" unique_id=1232338552]
+[node name="HurtboxShape" type="CollisionShape3D" parent="HurtboxComponent" unique_id=1232338552]
 shape = SubResource("CapsuleShape3D_olvt3")
 
 [node name="VelocityComponent" type="Node" parent="." unique_id=1211689721 node_paths=PackedStringArray("target")]

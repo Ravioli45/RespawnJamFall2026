@@ -3,9 +3,12 @@
 [ext_resource type="Script" uid="uid://c7i7yhga7ro25" path="res://Casino/level_manager.gd" id="1_x58q6"]
 [ext_resource type="PackedScene" uid="uid://df22nl2e0hplc" path="res://Player/player.tscn" id="2_pvja2"]
 [ext_resource type="Texture2D" uid="uid://cgus5ea2mdf0l" path="res://Casino/floor.png" id="3_mlntv"]
+[ext_resource type="PackedScene" uid="uid://xv5yv141ixnv" path="res://Components/Hurtbox/hurtbox_component.tscn" id="4_pvja2"]
 
 [sub_resource type="Environment" id="Environment_fjq73"]
+ambient_light_source = 2
 ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.4
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_olvt3"]
 
@@ -16,6 +19,8 @@ uv1_triplanar = true
 [sub_resource type="QuadMesh" id="QuadMesh_olvt3"]
 material = SubResource("StandardMaterial3D_wm55w")
 size = Vector2(10, 10)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_wm55w"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_wm55w"]
 
@@ -33,16 +38,25 @@ spot_range = 15.0
 [node name="Player" parent="." unique_id=1423276027 instance=ExtResource("2_pvja2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5693383, 0)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1521385989]
+[node name="Floor" type="StaticBody3D" parent="." unique_id=1521385989]
 collision_layer = 16
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1521298434]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=1521298434]
+visible = false
 shape = SubResource("WorldBoundaryShape3D_olvt3")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=1217951019]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor" unique_id=1217951019]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
 mesh = SubResource("QuadMesh_olvt3")
+
+[node name="HurtboxComponent" parent="Floor" unique_id=1539489579 instance=ExtResource("4_pvja2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 0)
+collision_layer = 16
+collision_mask = 2
+
+[node name="FloorHurtboxShape" type="CollisionShape3D" parent="Floor/HurtboxComponent" unique_id=1895868171]
+shape = SubResource("WorldBoundaryShape3D_wm55w")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=628248320]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7782433, 1.0508598, -2.2570865)

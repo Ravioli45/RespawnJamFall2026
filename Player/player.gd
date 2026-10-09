@@ -1,16 +1,23 @@
 class_name Player
 extends CharacterBody3D
 
+@export_subgroup("Movement")
 @export var head: Node3D
 @export var speed: float = 0
 @export var jump_strength: float = 0
 @export var mouse_sensitivity: float = 0
 
+@export_subgroup("Weapon")
+@export var weapon: Shotgun
+
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+		event = event as InputEventMouseMotion
 		rotate_y(-event.relative.x * mouse_sensitivity)
 		head.rotate_x(-event.relative.y * mouse_sensitivity)
 		head.rotation.x = clampf(head.rotation.x, -deg_to_rad(90), deg_to_rad(90))
+	elif event.is_action_pressed("shoot") and is_instance_valid(weapon):
+		weapon.shoot()
 
 func _physics_process(delta: float) -> void:
 	var target_velocity = Vector3(0, velocity.y, 0)

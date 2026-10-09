@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://3jkfkl5mfyjv"]
+
+[ext_resource type="Script" uid="uid://biosj5vjxw0ci" path="res://Weapons/Shotgun/shotgun.gd" id="1_c72ml"]
+[ext_resource type="PackedScene" uid="uid://clxip8xqtbyi0" path="res://Weapons/DiceBullet/dice_bullet.tscn" id="2_e1bfy"]
+[ext_resource type="PackedScene" uid="uid://s65wbfwlgqqx" path="res://ModelScenes/Shotgun.glb" id="2_lwqk7"]
+
+[node name="Shotgun" type="Node3D" unique_id=784934416]
+script = ExtResource("1_c72ml")
+projectile = ExtResource("2_e1bfy")
+
+[node name="Shotgun" parent="." unique_id=1474894985 instance=ExtResource("2_lwqk7")]
+
+[node name="ReloadTimer" type="Timer" parent="." unique_id=2112447287]

@@ -6,4 +6,5 @@ signal hit
 @export var damage: int = 1
 
 func on_hit():
+	# print("hit")
 	hit.emit()
