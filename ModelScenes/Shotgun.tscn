@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://c26s28f687nea"]
+
+[ext_resource type="PackedScene" uid="uid://b5ujy46kbykr5" path="res://ModelScenes/Shotgun.fbx" id="1_3nk4c"]
+
+[node name="Shotgun" unique_id=2049794314 instance=ExtResource("1_3nk4c")]
