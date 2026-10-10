@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://mhwknwcd76j1"]
 
 [sub_resource type="Gradient" id="Gradient_pf6px"]
-offsets = PackedFloat32Array(0, 0.2934028, 0.6857639, 1)
-colors = PackedColorArray(1, 0, 0, 1, 1, 0.39607844, 0, 1, 1, 0.42745098, 0, 1, 1, 1, 0, 1)
+offsets = PackedFloat32Array(0, 0.359375, 0.703125, 1)
+colors = PackedColorArray(1, 1, 0, 1, 1, 0.42745098, 0, 1, 1, 0.39607844, 0, 1, 1, 0, 0, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_nygmv"]
 gradient = SubResource("Gradient_pf6px")
@@ -35,7 +35,7 @@ height = 0.5
 emitting = false
 amount = 100
 sub_emitter = NodePath(".")
-lifetime = 0.21000000000000002
+lifetime = 0.21
 one_shot = true
 speed_scale = 0.9
 explosiveness = 1.0

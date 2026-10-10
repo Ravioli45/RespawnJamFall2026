@@ -3,6 +3,24 @@
 [ext_resource type="Script" uid="uid://k30fb8ohhruo" path="res://Interactables/SlotMachine/slot_machine.gd" id="1_nl070"]
 [ext_resource type="PackedScene" uid="uid://xv5yv141ixnv" path="res://Components/Hurtbox/hurtbox_component.tscn" id="2_akott"]
 [ext_resource type="PackedScene" uid="uid://dut2ly3audjdv" path="res://ModelScenes/SlotMachine.glb" id="2_gvwk0"]
+[ext_resource type="Texture2D" uid="uid://b5jw8epod1qua" path="res://Weapons/Modifiers/Explosion/explosion_blue.png" id="4_v3ne4"]
+[ext_resource type="Texture2D" uid="uid://buddp6ud8fho7" path="res://Weapons/Modifiers/Poison/poison_blue.png" id="5_mqvso"]
+[ext_resource type="Texture2D" uid="uid://c112pwidst60n" path="res://Weapons/Modifiers/Poison/poison_orange.png" id="5_yt0ye"]
+[ext_resource type="Texture2D" uid="uid://c78qj82u7gr1j" path="res://Weapons/Modifiers/Freeze/freeze_green.png" id="6_3gpgu"]
+[ext_resource type="Texture2D" uid="uid://bit47nxoywc7x" path="res://Weapons/Modifiers/Poison/poison_purple.png" id="7_cy5jf"]
+[ext_resource type="Texture2D" uid="uid://cy7313nkj1lln" path="res://Weapons/Modifiers/Freeze/freeze_red.png" id="8_mtkra"]
+[ext_resource type="Texture2D" uid="uid://cglukyary05p2" path="res://Weapons/Modifiers/Poison/poison_yellow.png" id="9_e4cl1"]
+[ext_resource type="Texture2D" uid="uid://cdddvliunirrb" path="res://Weapons/Modifiers/Freeze/freeze_blue.png" id="10_nqayx"]
+[ext_resource type="Texture2D" uid="uid://b4pf1ugdddc3" path="res://Weapons/Modifiers/Explosion/explosion_green.png" id="11_fgne3"]
+[ext_resource type="Texture2D" uid="uid://x101sp658t4b" path="res://Weapons/Modifiers/Poison/poison_red.png" id="12_ksun7"]
+[ext_resource type="Texture2D" uid="uid://ce027obkhpyij" path="res://Weapons/Modifiers/Freeze/freeze_yellow.png" id="13_s0uif"]
+[ext_resource type="Texture2D" uid="uid://baxwnlr2x7jh3" path="res://Weapons/Modifiers/Freeze/freeze_purple.png" id="14_mu44q"]
+[ext_resource type="Texture2D" uid="uid://n5co3p3chfrs" path="res://Weapons/Modifiers/Explosion/explosion_orange.png" id="15_kvug5"]
+[ext_resource type="Texture2D" uid="uid://c346fnhk6v0g0" path="res://Weapons/Modifiers/Poison/poison_green.png" id="16_2pdxp"]
+[ext_resource type="Texture2D" uid="uid://dellggkd5wfma" path="res://Weapons/Modifiers/Explosion/explosion_red.png" id="17_ai0p1"]
+[ext_resource type="Texture2D" uid="uid://doimqumlouaqn" path="res://Weapons/Modifiers/Explosion/explosion_yellow.png" id="19_fd0yp"]
+[ext_resource type="Texture2D" uid="uid://c61ilj252ajkd" path="res://Weapons/Modifiers/Freeze/freeze_orange.png" id="20_2rhfl"]
+[ext_resource type="Texture2D" uid="uid://dguqmtkh0xw3o" path="res://Weapons/Modifiers/Explosion/explosion_purple.png" id="21_kihi1"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_wm55w"]
 size = Vector3(0.36743164, 1.0454102, 0.24365234)
@@ -10,10 +28,74 @@ size = Vector3(0.36743164, 1.0454102, 0.24365234)
 [sub_resource type="BoxShape3D" id="BoxShape3D_v3ne4"]
 size = Vector3(0.47753906, 1.0996094, 0.3515625)
 
-[node name="SlotMachine" type="StaticBody3D" unique_id=795938273 node_paths=PackedStringArray("animation_player")]
+[sub_resource type="SpriteFrames" id="SpriteFrames_b6c64"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_v3ne4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_yt0ye")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_3gpgu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_cy5jf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_mtkra")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_e4cl1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_nqayx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_fgne3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_ksun7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_s0uif")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_mu44q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_kvug5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_2pdxp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_ai0p1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_mqvso")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_fd0yp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_2rhfl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_kihi1")
+}],
+"loop": 1,
+"name": &"spin",
+"speed": 10.0
+}]
+
+[node name="SlotMachine" type="StaticBody3D" unique_id=795938273 node_paths=PackedStringArray("slots", "slot_timer", "animation_player")]
 collision_layer = 48
 collision_mask = 0
 script = ExtResource("1_nl070")
+slots = [NodePath("Slot1"), NodePath("Slot2"), NodePath("Slot3")]
+slot_timer = NodePath("SlotTimer")
 animation_player = NodePath("SlotMachine/AnimationPlayer")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=289885049]
@@ -31,6 +113,25 @@ shape = SubResource("BoxShape3D_v3ne4")
 [node name="SlotMachine" parent="." unique_id=235045621 instance=ExtResource("2_gvwk0")]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 
+[node name="Slot1" type="AnimatedSprite3D" parent="." unique_id=261608841]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -0.0022115707, 0.8258476, -0.01872269)
+sprite_frames = SubResource("SpriteFrames_b6c64")
+animation = &"spin"
+
+[node name="Slot2" type="AnimatedSprite3D" parent="." unique_id=497204153]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0.079617344, 0.8258476, -0.01872269)
+sprite_frames = SubResource("SpriteFrames_b6c64")
+animation = &"spin"
+
+[node name="Slot3" type="AnimatedSprite3D" parent="." unique_id=145849785]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -0.08368598, 0.8258476, -0.01872269)
+sprite_frames = SubResource("SpriteFrames_b6c64")
+animation = &"spin"
+
+[node name="SlotTimer" type="Timer" parent="." unique_id=915242293]
+wait_time = 2.0
+
 [connection signal="animation_finished" from="SlotMachine/AnimationPlayer" to="." method="_on_animation_finished"]
+[connection signal="timeout" from="SlotTimer" to="." method="on_slot_timer_finished"]
 
 [editable path="SlotMachine"]
