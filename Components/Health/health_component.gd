@@ -11,5 +11,5 @@ func take_damage(damage: int):
 
 	health_changed.emit(health + damage, health)
 
-	if health <= 0:
+	if health <= 0 and health + damage > 0:
 		died.emit()

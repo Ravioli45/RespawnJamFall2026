@@ -26,10 +26,11 @@ corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 
-[node name="Player" type="CharacterBody3D" unique_id=1423276027 node_paths=PackedStringArray("interact_raycast", "head", "weapon", "dice_grid")]
+[node name="Player" type="CharacterBody3D" unique_id=1423276027 node_paths=PackedStringArray("interact_raycast", "health", "head", "weapon", "dice_grid")]
 collision_mask = 28
 script = ExtResource("1_l8h54")
 interact_raycast = NodePath("RayCast3D")
+health = NodePath("HealthComponent")
 head = NodePath("Pivot")
 speed = 5.0
 jump_strength = 5.0

@@ -4,6 +4,8 @@ extends CharacterBody3D
 signal player_died
 
 @export var interact_raycast: RayCast3D
+@export var coins: int = 0
+@export var health: HealthComponent
 
 @export_subgroup("Movement")
 @export var head: Node3D

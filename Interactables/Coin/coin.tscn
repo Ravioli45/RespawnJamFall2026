@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://dip8ma4ltw66k"]
+
+[ext_resource type="Script" uid="uid://bms5uk47hxl2u" path="res://Interactables/Coin/coin.gd" id="1_lexh4"]
+[ext_resource type="PackedScene" uid="uid://r0ir7nxpg4uo" path="res://ModelScenes/coin.tscn" id="1_yp52d"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_wm55w"]
+height = 0.02
+radius = 0.12
+
+[node name="Coin" type="Node3D" unique_id=1632909294]
+script = ExtResource("1_lexh4")
+rotation_speed = 5.0
+
+[node name="coin" parent="." unique_id=1414749562 instance=ExtResource("1_yp52d")]
+transform = Transform3D(2, 0, 0, 0, -8.742278e-08, -2, 0, 2, -8.742278e-08, 0, 0, 0)
+
+[node name="Area3D" type="Area3D" parent="." unique_id=1019933843]
+collision_layer = 32
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1234119101]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+shape = SubResource("CylinderShape3D_wm55w")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_body_entered"]

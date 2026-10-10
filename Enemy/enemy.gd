@@ -14,6 +14,9 @@ enum EnemyState{
 @export var speed: float = 1
 @export var navigation_agent: NavigationAgent3D
 
+# @export var hitbox: HitboxComponent
+@export var coin_scene: PackedScene
+
 var state: EnemyState = EnemyState.Running
 
 # Called when the node enters the scene tree for the first time.
@@ -45,6 +48,10 @@ func _physics_process(delta: float) -> void:
 					var nav_velocity := transform.basis.x.normalized() * speed
 					target_velocity.x = nav_velocity.x
 					target_velocity.z = nav_velocity.z
+			
+			# for body in hitbox.get_overlapping_bodies():
+				# pass
+			
 		EnemyState.Attacking, EnemyState.Hurt:
 			target_velocity.x = 0
 			target_velocity.y = 0
@@ -80,6 +87,16 @@ func get_poisoned() -> void:
 
 func _on_died() -> void:
 	print("enemy died")
+	var coins_dropped := randi_range(1, 3)
+	
+	for i in range(coins_dropped):
+		var new_coin := coin_scene.instantiate() as Coin
+		get_parent().add_child(new_coin)
+		new_coin.global_position = global_position
+
+		new_coin.global_position.x += randf_range(-0.1, 0.1)
+		new_coin.global_position.z += randf_range(-0.1, 0.1)
+	
 	call_deferred("queue_free")
 
 
@@ -91,11 +108,12 @@ func _on_hurt() -> void:
 
 func _on_hit(_hurtbox: HurtboxComponent) -> void:
 	state = EnemyState.Attacking
-	pass # Replace with function body.
-
 
 func _on_animation_finished(anim_name: StringName) -> void:
 	print(anim_name)
 	if anim_name == "Hurt" or anim_name == "Attack":
 		state = EnemyState.Running
+		# hitbox.monitorable = false
+		# await get_tree().physics_frame
+		# hitbox.monitorable = true
 	pass # Replace with function body.
