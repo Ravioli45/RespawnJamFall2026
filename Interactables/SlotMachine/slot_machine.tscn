@@ -7,20 +7,26 @@
 [ext_resource type="Texture2D" uid="uid://buddp6ud8fho7" path="res://Weapons/Modifiers/Poison/poison_blue.png" id="5_mqvso"]
 [ext_resource type="Texture2D" uid="uid://c112pwidst60n" path="res://Weapons/Modifiers/Poison/poison_orange.png" id="5_yt0ye"]
 [ext_resource type="Texture2D" uid="uid://c78qj82u7gr1j" path="res://Weapons/Modifiers/Freeze/freeze_green.png" id="6_3gpgu"]
+[ext_resource type="Texture2D" uid="uid://cb0p4tqoc1tl3" path="res://Weapons/Dice/FaceTextures/face_four_small.png" id="6_ksun7"]
 [ext_resource type="Texture2D" uid="uid://bit47nxoywc7x" path="res://Weapons/Modifiers/Poison/poison_purple.png" id="7_cy5jf"]
 [ext_resource type="Texture2D" uid="uid://cy7313nkj1lln" path="res://Weapons/Modifiers/Freeze/freeze_red.png" id="8_mtkra"]
 [ext_resource type="Texture2D" uid="uid://cglukyary05p2" path="res://Weapons/Modifiers/Poison/poison_yellow.png" id="9_e4cl1"]
 [ext_resource type="Texture2D" uid="uid://cdddvliunirrb" path="res://Weapons/Modifiers/Freeze/freeze_blue.png" id="10_nqayx"]
+[ext_resource type="Texture2D" uid="uid://c4rfq6dw3nduv" path="res://Weapons/Dice/FaceTextures/face_five_small.png" id="10_s0uif"]
 [ext_resource type="Texture2D" uid="uid://b4pf1ugdddc3" path="res://Weapons/Modifiers/Explosion/explosion_green.png" id="11_fgne3"]
 [ext_resource type="Texture2D" uid="uid://x101sp658t4b" path="res://Weapons/Modifiers/Poison/poison_red.png" id="12_ksun7"]
 [ext_resource type="Texture2D" uid="uid://ce027obkhpyij" path="res://Weapons/Modifiers/Freeze/freeze_yellow.png" id="13_s0uif"]
+[ext_resource type="Texture2D" uid="uid://dpc82dpj7j3hq" path="res://Weapons/Dice/FaceTextures/face_six_small.png" id="14_kvug5"]
 [ext_resource type="Texture2D" uid="uid://baxwnlr2x7jh3" path="res://Weapons/Modifiers/Freeze/freeze_purple.png" id="14_mu44q"]
 [ext_resource type="Texture2D" uid="uid://n5co3p3chfrs" path="res://Weapons/Modifiers/Explosion/explosion_orange.png" id="15_kvug5"]
 [ext_resource type="Texture2D" uid="uid://c346fnhk6v0g0" path="res://Weapons/Modifiers/Poison/poison_green.png" id="16_2pdxp"]
+[ext_resource type="Texture2D" uid="uid://ggrveo3sp62t" path="res://Weapons/Dice/FaceTextures/face_three_small.png" id="16_ai0p1"]
 [ext_resource type="Texture2D" uid="uid://dellggkd5wfma" path="res://Weapons/Modifiers/Explosion/explosion_red.png" id="17_ai0p1"]
 [ext_resource type="Texture2D" uid="uid://doimqumlouaqn" path="res://Weapons/Modifiers/Explosion/explosion_yellow.png" id="19_fd0yp"]
 [ext_resource type="Texture2D" uid="uid://c61ilj252ajkd" path="res://Weapons/Modifiers/Freeze/freeze_orange.png" id="20_2rhfl"]
 [ext_resource type="Texture2D" uid="uid://dguqmtkh0xw3o" path="res://Weapons/Modifiers/Explosion/explosion_purple.png" id="21_kihi1"]
+[ext_resource type="Texture2D" uid="uid://cgeds3cc70tx4" path="res://Weapons/Dice/FaceTextures/face_two_small.png" id="24_fd0yp"]
+[ext_resource type="Texture2D" uid="uid://bitcdssjsnile" path="res://Weapons/Dice/FaceTextures/face_one_small.png" id="26_2rhfl"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_wm55w"]
 size = Vector3(0.36743164, 1.0454102, 0.24365234)
@@ -32,37 +38,49 @@ size = Vector3(0.47753906, 1.0996094, 0.3515625)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("4_v3ne4")
-}, {
-"duration": 1.0,
-"texture": ExtResource("5_yt0ye")
-}, {
-"duration": 1.0,
-"texture": ExtResource("6_3gpgu")
-}, {
-"duration": 1.0,
 "texture": ExtResource("7_cy5jf")
 }, {
 "duration": 1.0,
 "texture": ExtResource("8_mtkra")
 }, {
 "duration": 1.0,
-"texture": ExtResource("9_e4cl1")
+"texture": ExtResource("6_ksun7")
 }, {
 "duration": 1.0,
-"texture": ExtResource("10_nqayx")
+"texture": ExtResource("5_yt0ye")
 }, {
 "duration": 1.0,
-"texture": ExtResource("11_fgne3")
+"texture": ExtResource("4_v3ne4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_3gpgu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_s0uif")
 }, {
 "duration": 1.0,
 "texture": ExtResource("12_ksun7")
 }, {
 "duration": 1.0,
+"texture": ExtResource("10_nqayx")
+}, {
+"duration": 1.0,
 "texture": ExtResource("13_s0uif")
 }, {
 "duration": 1.0,
+"texture": ExtResource("14_kvug5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_e4cl1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_ai0p1")
+}, {
+"duration": 1.0,
 "texture": ExtResource("14_mu44q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_fgne3")
 }, {
 "duration": 1.0,
 "texture": ExtResource("15_kvug5")
@@ -77,13 +95,19 @@ animations = [{
 "texture": ExtResource("5_mqvso")
 }, {
 "duration": 1.0,
+"texture": ExtResource("21_kihi1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_fd0yp")
+}, {
+"duration": 1.0,
 "texture": ExtResource("19_fd0yp")
 }, {
 "duration": 1.0,
-"texture": ExtResource("20_2rhfl")
+"texture": ExtResource("26_2rhfl")
 }, {
 "duration": 1.0,
-"texture": ExtResource("21_kihi1")
+"texture": ExtResource("20_2rhfl")
 }],
 "loop": 1,
 "name": &"spin",
@@ -130,6 +154,7 @@ animation = &"spin"
 
 [node name="SlotTimer" type="Timer" parent="." unique_id=915242293]
 wait_time = 2.0
+one_shot = true
 
 [connection signal="animation_finished" from="SlotMachine/AnimationPlayer" to="." method="_on_animation_finished"]
 [connection signal="timeout" from="SlotTimer" to="." method="on_slot_timer_finished"]

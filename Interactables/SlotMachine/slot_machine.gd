@@ -1,7 +1,7 @@
 class_name SlotMachine
 extends StaticBody3D
 @export var slots: Array[AnimatedSprite3D] = []
-var total_slots: int = 18
+var total_slots: int = 24
 var chosen_slots: Array[int] = [0,0,0]
 @export var slot_timer: Timer
 
@@ -36,7 +36,6 @@ func pick_slot() -> int:
 	return (randi() % total_slots)
 
 func on_slot_timer_finished() -> void:
-	slot_timer.stop()
 	for i in slots.size():
 		slots[i].stop()
 		slots[i].frame = chosen_slots[i]
