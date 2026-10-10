@@ -14,7 +14,7 @@ enum EnemyState{
 @export var speed: float = 1
 @export var navigation_agent: NavigationAgent3D
 
-# @export var hitbox: HitboxComponent
+@export var hitbox: HitboxComponent
 @export var coin_scene: PackedScene
 
 var state: EnemyState = EnemyState.Running
@@ -113,7 +113,8 @@ func _on_animation_finished(anim_name: StringName) -> void:
 	print(anim_name)
 	if anim_name == "Hurt" or anim_name == "Attack":
 		state = EnemyState.Running
-		# hitbox.monitorable = false
-		# await get_tree().physics_frame
-		# hitbox.monitorable = true
+		hitbox.monitoring = false
+		await get_tree().physics_frame
+		await get_tree().physics_frame
+		hitbox.monitoring = true
 	pass # Replace with function body.

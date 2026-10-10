@@ -85,7 +85,7 @@ size = Vector3(0.3, 0.8903252, 0.539)
 radius = 0.05
 height = 0.1
 
-[node name="Enemy" type="CharacterBody3D" unique_id=1516501594 node_paths=PackedStringArray("body", "poison_particles", "navigation_agent")]
+[node name="Enemy" type="CharacterBody3D" unique_id=1516501594 node_paths=PackedStringArray("body", "poison_particles", "navigation_agent", "hitbox")]
 collision_layer = 4
 collision_mask = 21
 script = ExtResource("1_px1sc")
@@ -94,6 +94,7 @@ frozen_material = ExtResource("2_am0pq")
 poison_particles = NodePath("PoisonParticles")
 speed = 2.5
 navigation_agent = NodePath("NavigationAgent3D")
+hitbox = NodePath("HitboxComponent")
 coin_scene = ExtResource("3_0rspp")
 
 [node name="EnemyCollision" type="CollisionShape3D" parent="." unique_id=875853842]
@@ -104,16 +105,15 @@ shape = SubResource("CapsuleShape3D_am0pq")
 transform = Transform3D(-5.2453664e-09, 0, 0.12, 0, 0.12, 0, -0.12, 0, -5.2453664e-09, 0, -0.5, 0)
 
 [node name="Skeleton3D" parent="Enemy/Armature" parent_id_path=PackedInt32Array(511010101, 1541835374) index="0" unique_id=339976389]
-bones/6/rotation = Quaternion(0.005442918, 0.022606544, 0.38928297, 0.92082465)
-bones/7/rotation = Quaternion(0.0130480295, 0.005566546, 0.32439736, 0.94581455)
-bones/10/rotation = Quaternion(-0.023831856, 0.05392437, -0.4017449, 0.9138519)
-bones/11/rotation = Quaternion(0.03232282, -0.014623863, -0.30401734, 0.95200574)
-bones/14/rotation = Quaternion(-0.37712055, 0.05743949, 0.09049985, 0.9199406)
-bones/15/rotation = Quaternion(0.0041862344, 0.00023914716, -0.14523518, 0.9893883)
-bones/16/rotation = Quaternion(0.0015227523, -5.599853e-05, 0.64242834, 0.7663443)
-bones/19/rotation = Quaternion(-0.37710992, 0.01353627, -0.016218774, 0.9259276)
-bones/20/rotation = Quaternion(0.0028404281, -3.873647e-05, 0.14097156, 0.9900096)
-bones/21/rotation = Quaternion(0.0011980552, -7.566823e-05, -0.64905006, 0.76074475)
+bones/6/rotation = Quaternion(-0.36042118, -0.223594, 0.28040934, 0.8610882)
+bones/7/rotation = Quaternion(0.1487534, 0.07207483, 0.44150907, 0.8818999)
+bones/10/rotation = Quaternion(0.17762028, -0.3302697, -0.36373115, 0.8526855)
+bones/11/rotation = Quaternion(0.13144943, 0.06643034, -0.32334948, 0.9347477)
+bones/14/rotation = Quaternion(-0.36702427, -0.09426111, -0.26917738, 0.8854104)
+bones/15/rotation = Quaternion(-0.002459348, 0.0015414366, -0.22602683, 0.97411674)
+bones/19/rotation = Quaternion(-0.35845548, -0.11053166, -0.31398407, 0.8721848)
+bones/20/rotation = Quaternion(-0.0005261909, 0.0048046494, 0.3097908, 0.9507925)
+bones/21/rotation = Quaternion(-0.0010600885, -0.00927258, -0.46535516, 0.88507485)
 
 [node name="PoisonParticles" type="GPUParticles3D" parent="." unique_id=1533864931]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8908751, 0)
@@ -135,6 +135,7 @@ script = ExtResource("4_ncf7h")
 metadata/_custom_type_script = "uid://bd1oo4b6c1b01"
 
 [node name="HurtboxComponent" parent="." unique_id=1539489579 node_paths=PackedStringArray("health") instance=ExtResource("5_m6jha")]
+collision_layer = 4
 collision_mask = 2
 health = NodePath("../HealthComponent")
 
@@ -145,6 +146,7 @@ shape = SubResource("CapsuleShape3D_wm55w")
 [node name="HitboxComponent" parent="." unique_id=1599040273 instance=ExtResource("7_glvfu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.23196197, 0.09649566, 0)
 collision_layer = 4
+collision_mask = 1
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitboxComponent" unique_id=386021401]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0881626, 0)

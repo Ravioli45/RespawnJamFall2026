@@ -226,6 +226,7 @@ collision_layer = 8
 shape = SubResource("BoxShape3D_wm55w")
 
 [node name="HurtboxComponent" parent="WallR" unique_id=1695009105 instance=ExtResource("4_pvja2")]
+collision_layer = 16
 collision_mask = 10
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="WallR/HurtboxComponent" unique_id=559782671]
@@ -242,6 +243,7 @@ collision_layer = 8
 shape = SubResource("BoxShape3D_wm55w")
 
 [node name="HurtboxComponent" parent="WallL" unique_id=1140246490 instance=ExtResource("4_pvja2")]
+collision_layer = 16
 collision_mask = 10
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="WallL/HurtboxComponent" unique_id=1937447151]
@@ -258,6 +260,7 @@ collision_layer = 8
 shape = SubResource("BoxShape3D_olvt3")
 
 [node name="HurtboxComponent" parent="WallB" unique_id=177093918 instance=ExtResource("4_pvja2")]
+collision_layer = 16
 collision_mask = 10
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="WallB/HurtboxComponent" unique_id=763950298]
@@ -274,6 +277,7 @@ collision_layer = 8
 shape = SubResource("BoxShape3D_olvt3")
 
 [node name="HurtboxComponent" parent="WallF" unique_id=1670613265 instance=ExtResource("4_pvja2")]
+collision_layer = 16
 collision_mask = 10
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="WallF/HurtboxComponent" unique_id=1240509103]
@@ -284,6 +288,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
 mesh = SubResource("PlaneMesh_wm55w")
 
 [node name="HurtboxComponent" parent="Ceil" unique_id=1372759935 instance=ExtResource("4_pvja2")]
+collision_layer = 16
 collision_mask = 10
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ceil/HurtboxComponent" unique_id=1912803370]
