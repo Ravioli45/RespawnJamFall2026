@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://dqukiwqce8jxl" path="res://Weapons/Dice/FaceTextures/face_four.png" id="8_6sp5e"]
 [ext_resource type="Texture2D" uid="uid://d13tngttl31m0" path="res://Weapons/Dice/FaceTextures/face_five.png" id="9_rl4sf"]
 [ext_resource type="Texture2D" uid="uid://dqyw2ibe4y6in" path="res://Weapons/Dice/FaceTextures/face_six.png" id="10_uy0yp"]
+[ext_resource type="Resource" uid="uid://c1euvvdbmchir" path="res://Weapons/Dice/default_dice.tres" id="11_v04ei"]
 
 [sub_resource type="Resource" id="Resource_no02n"]
 script = ExtResource("4_6eg5q")
@@ -94,18 +95,68 @@ script = ExtResource("3_ifwlu")
 faces = Array[ExtResource("4_6eg5q")]([SubResource("Resource_5b5cd"), SubResource("Resource_4i01s"), SubResource("Resource_bebg0"), SubResource("Resource_rqbb4"), SubResource("Resource_nbeli"), SubResource("Resource_irxtu")])
 metadata/_custom_type_script = "uid://3u06ynf86tg3"
 
-[node name="Shotgun" type="Node3D" unique_id=784934416 node_paths=PackedStringArray("reload_timer")]
+[sub_resource type="Gradient" id="Gradient_v04ei"]
+colors = PackedColorArray(0.99999994, 0.5802401, 0.17385134, 1, 0.2803557, 0.17190513, 4.813075e-08, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_cn3yk"]
+gradient = SubResource("Gradient_v04ei")
+
+[sub_resource type="Curve" id="Curve_v04ei"]
+_data = [Vector2(0, 1), 0.0, -0.2796279, 0, 0, Vector2(0.7974276, 0.84269667), -0.19726348, 0.0, 1, 0, Vector2(1, 0), -1.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_mlntv"]
+curve = SubResource("Curve_v04ei")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_olvt3"]
+radial_velocity_min = -2.2351742e-05
+radial_velocity_max = 0.49997765
+gravity = Vector3(0, 0, 0)
+scale_max = 1.5
+scale_curve = SubResource("CurveTexture_mlntv")
+color_ramp = SubResource("GradientTexture1D_cn3yk")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r7dxm"]
+vertex_color_use_as_albedo = true
+emission = Color(0.7581918, 0.7581918, 0.7581917, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_wm55w"]
+material = SubResource("StandardMaterial3D_r7dxm")
+radius = 0.025
+height = 0.05
+
+[node name="Shotgun" type="Node3D" unique_id=784934416 node_paths=PackedStringArray("reload_timer", "animation_player", "muzzle_particles")]
 script = ExtResource("1_c72ml")
 reload_timer = NodePath("ReloadTimer")
+animation_player = NodePath("Shotgun/AnimationPlayer")
+muzzle_particles = NodePath("Shotgun/Cube/GPUParticles3D")
 projectile = ExtResource("2_e1bfy")
-spread = 0.1
+spread = 0.2
 dice_data = Array[ExtResource("3_ifwlu")]([SubResource("Resource_2am64"), SubResource("Resource_ho3sj")])
-
-[node name="Shotgun" parent="." unique_id=1474894985 instance=ExtResource("2_lwqk7")]
+default_dice = ExtResource("11_v04ei")
 
 [node name="ReloadTimer" type="Timer" parent="." unique_id=2112447287]
 process_callback = 0
 wait_time = 0.5
 one_shot = true
 
+[node name="Shotgun" parent="." unique_id=63231070 instance=ExtResource("2_lwqk7")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+
+[node name="Cube_001" parent="Shotgun/Cube" parent_id_path=PackedInt32Array(63231070, 439382938) index="0" unique_id=227804474]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8322325, 1.5095093, 15.876263)
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Shotgun/Cube" parent_id_path=PackedInt32Array(63231070, 439382938) index="1" unique_id=413466490]
+transform = Transform3D(-33.333336, 0, 2.9140926e-06, 0, 20, 0, -1.7484551e-06, 0, -20, -0.8000592, 1.9829998, 19.315)
+emitting = false
+lifetime = 0.2
+one_shot = true
+explosiveness = 1.0
+fixed_fps = 60
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_olvt3")
+draw_pass_1 = SubResource("SphereMesh_wm55w")
+
 [connection signal="timeout" from="ReloadTimer" to="." method="_on_reload_timeout"]
+
+[editable path="Shotgun"]

@@ -3,5 +3,3 @@
 [ext_resource type="PackedScene" uid="uid://s65wbfwlgqqx" path="res://ModelScenes/Shotgun.glb" id="1_arh1d"]
 
 [node name="Shotgun" unique_id=241880757 instance=ExtResource("1_arh1d")]
-
-[node name="AnimationTree" type="AnimationTree" parent="." index="2" unique_id=1022035823]

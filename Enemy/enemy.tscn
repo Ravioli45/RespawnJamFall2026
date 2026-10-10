@@ -29,7 +29,7 @@ poison_particles = NodePath("PoisonParticles")
 
 [node name="Enemy" parent="." unique_id=511010101 instance=ExtResource("1_2pb1h")]
 
-[node name="Skeleton3D" parent="Enemy/Armature" parent_id_path=PackedInt32Array(511010101, 2103661224) index="0" unique_id=321837820]
+[node name="Skeleton3D" parent="Enemy/Armature" parent_id_path=PackedInt32Array(511010101, 360008215) index="0" unique_id=1245711315]
 bones/6/rotation = Quaternion(-0.0032078521, 0.00941, 0.38919201, 0.92110294)
 bones/7/rotation = Quaternion(0.0008889035, 0.0023210861, 0.32416677, 0.9459967)
 bones/8/rotation = Quaternion(-0.053644657, -0.71229696, 0.0027854105, 0.6998197)
@@ -47,7 +47,6 @@ bones/21/rotation = Quaternion(0.0011980537, -7.566749e-05, -0.6490501, 0.760744
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8908751, 0)
 emitting = false
 amount = 2
-sub_emitter = NodePath(".")
 lifetime = 0.2
 speed_scale = 0.1
 process_material = SubResource("ParticleProcessMaterial_ddld8")

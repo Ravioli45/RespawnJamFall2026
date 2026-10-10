@@ -1,7 +1,11 @@
 class_name Shotgun
 extends Node3D
 
+signal reloaded
+
 @export var reload_timer: Timer
+@export var animation_player: AnimationPlayer
+@export var muzzle_particles: GPUParticles3D
 
 @export_subgroup("Projectile")
 @export var projectile_spawn_position: Node3D
@@ -10,6 +14,7 @@ extends Node3D
 
 @export_subgroup("Dice")
 @export var dice_data: Array[DieData]
+@export var default_dice: DieData
 # @export var dice_count: int = 1
 
 var current_faces: Array[FaceData]
@@ -23,6 +28,9 @@ func shoot() -> void:
 	# print("pew pew")
 
 	if projectile and projectile_spawn_position and can_shoot:
+		animation_player.play("Reload")
+		muzzle_particles.emitting = true
+		
 		for face in current_faces:
 			var new_projectile = projectile.instantiate() as DieBullet
 			get_parent().get_parent().get_parent().add_child(new_projectile)
@@ -49,4 +57,5 @@ func choose_faces() -> void:
 
 func _on_reload_timeout() -> void:
 	choose_faces()
+	reloaded.emit()
 	can_shoot = true

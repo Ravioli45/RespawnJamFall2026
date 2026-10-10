@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://ceg1akbnruav2"]
+
+[ext_resource type="PackedScene" uid="uid://b4kqbvoo28tbr" path="res://ModelScenes/Dice.tscn" id="1_62rii"]
+[ext_resource type="Script" uid="uid://8jk0158o4gha" path="res://HUD/display_die.gd" id="1_ttapp"]
+[ext_resource type="Texture2D" uid="uid://cugu54owoep64" path="res://Weapons/Dice/FaceTextures/face_one.png" id="3_jr4pf"]
+
+[sub_resource type="Environment" id="Environment_wm55w"]
+background_mode = 1
+background_color = Color(0.07683582, 0.07683582, 0.07683582, 1)
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.7
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ttapp"]
+resource_local_to_scene = true
+albedo_texture = ExtResource("3_jr4pf")
+
+[sub_resource type="QuadMesh" id="QuadMesh_wm55w"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_ttapp")
+
+[node name="DisplayDie" type="PanelContainer" unique_id=1304030984 node_paths=PackedStringArray("dice_model", "dice_face")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+script = ExtResource("1_ttapp")
+min_spin_speed = 500
+max_spin_speed = 1000
+dice_model = NodePath("SubViewportContainer/SubViewport/Dice")
+dice_face = NodePath("SubViewportContainer/SubViewport/DiceFace")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=2003872113]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+mouse_filter = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=1687947409]
+own_world_3d = true
+handle_input_locally = false
+size = Vector2i(1280, 720)
+render_target_update_mode = 4
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/SubViewport" unique_id=1119754809]
+environment = SubResource("Environment_wm55w")
+
+[node name="Dice" parent="SubViewportContainer/SubViewport" unique_id=675538662 instance=ExtResource("1_62rii")]
+visible = false
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport" unique_id=832597313]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+current = true
+
+[node name="DiceFace" type="MeshInstance3D" parent="SubViewportContainer/SubViewport" unique_id=637440815]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0.3)
+mesh = SubResource("QuadMesh_wm55w")

@@ -10,5 +10,8 @@ func _init(p_value = 0, p_modifiers = 0, p_face_texture = null) -> void:
 	modifiers = p_modifiers
 	face_texture = p_face_texture
 
+func _to_string() -> String:
+	return "FaceData: " + str(value)
+
 func add_modifiers(flags: ModifierTable.ModifierFlags):
 	modifiers |= flags

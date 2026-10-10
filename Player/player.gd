@@ -10,6 +10,14 @@ extends CharacterBody3D
 @export_subgroup("Weapon")
 @export var weapon: Shotgun
 
+@export_subgroup("Dice")
+@export var dice_grid: DiceGrid
+
+func _ready() -> void:
+	#dice_grid.show_faces(weapon.current_faces)
+	for f in weapon.current_faces:
+		dice_grid.add_dice(f)
+
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		event = event as InputEventMouseMotion
@@ -18,6 +26,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		head.rotation.x = clampf(head.rotation.x, -deg_to_rad(90), deg_to_rad(90))
 	elif event.is_action_pressed("shoot") and is_instance_valid(weapon):
 		weapon.shoot()
+		dice_grid.roll_all()
 
 func _physics_process(delta: float) -> void:
 	var target_velocity = Vector3(0, velocity.y, 0)
@@ -44,3 +53,9 @@ func _on_died() -> void:
 func _on_health_changed(old_health: Variant, new_health: Variant) -> void:
 	print("player took " + str(old_health - new_health) + " damage")
 	# TODO: replace with player take damage logic
+
+func _on_reloaded():
+	print("reloaded")
+	#print(weapon.current_faces)
+	dice_grid.show_faces(weapon.current_faces)
+	pass

@@ -6,13 +6,25 @@
 [ext_resource type="Script" uid="uid://c06frpdbjghyu" path="res://Components/Velocity/velocity_component.gd" id="4_gwnis"]
 [ext_resource type="PackedScene" uid="uid://xv5yv141ixnv" path="res://Components/Hurtbox/hurtbox_component.tscn" id="4_k53q1"]
 [ext_resource type="Texture2D" uid="uid://d32j1eul6aiir" path="res://Player/crosshair.png" id="6_fhl08"]
+[ext_resource type="PackedScene" uid="uid://ctk2ctwsohy6s" path="res://HUD/DiceGrid.tscn" id="7_vtle1"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wm55w"]
 radius = 0.4
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_olvt3"]
 
-[node name="Player" type="CharacterBody3D" unique_id=1423276027 node_paths=PackedStringArray("head", "weapon")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vtle1"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[node name="Player" type="CharacterBody3D" unique_id=1423276027 node_paths=PackedStringArray("head", "weapon", "dice_grid")]
 collision_mask = 28
 script = ExtResource("1_l8h54")
 head = NodePath("Pivot")
@@ -20,6 +32,7 @@ speed = 5.0
 jump_strength = 5.0
 mouse_sensitivity = 0.005
 weapon = NodePath("Pivot/Shotgun")
+dice_grid = NodePath("PanelContainer/DiceGrid")
 
 [node name="PlayerShape" type="CollisionShape3D" parent="." unique_id=1811466163]
 shape = SubResource("CapsuleShape3D_wm55w")
@@ -46,11 +59,11 @@ texture = ExtResource("6_fhl08")
 fov = 90.0
 
 [node name="Shotgun" parent="Pivot" unique_id=784934416 node_paths=PackedStringArray("projectile_spawn_position") instance=ExtResource("2_k53q1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.285, -0.135, -0.59)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.235, -0.4, -0.4)
 projectile_spawn_position = NodePath("../Marker3D")
 
 [node name="Marker3D" type="Marker3D" parent="Pivot" unique_id=1409274533]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.9180465)
 
 [node name="HealthComponent" type="Node" parent="." unique_id=883154550]
 script = ExtResource("2_4ntmi")
@@ -67,5 +80,22 @@ script = ExtResource("4_gwnis")
 target = NodePath("..")
 metadata/_custom_type_script = "uid://c06frpdbjghyu"
 
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=933332466]
+clip_children = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -256.0
+offset_right = 256.0
+grow_vertical = 0
+size_flags_horizontal = 0
+size_flags_vertical = 8
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_vtle1")
+
+[node name="DiceGrid" parent="PanelContainer" unique_id=33086084 instance=ExtResource("7_vtle1")]
+layout_mode = 2
+
+[connection signal="reloaded" from="Pivot/Shotgun" to="." method="_on_reloaded"]
 [connection signal="died" from="HealthComponent" to="." method="_on_died"]
 [connection signal="health_changed" from="HealthComponent" to="." method="_on_health_changed"]

@@ -1,5 +1,13 @@
 [gd_scene format=3 uid="uid://b4kqbvoo28tbr"]
 
 [ext_resource type="PackedScene" uid="uid://3lracsh2m0uc" path="res://ModelScenes/Dice.glb" id="1_vf2l3"]
+[ext_resource type="Texture2D" uid="uid://eq0srgxhnd1w" path="res://ModelScenes/Dice_Dice Texture.png" id="2_6c7pt"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kytes"]
+albedo_texture = ExtResource("2_6c7pt")
 
 [node name="Dice" unique_id=675538662 instance=ExtResource("1_vf2l3")]
+
+[node name="Cube" parent="." index="0" unique_id=1813331945]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+surface_material_override/0 = SubResource("StandardMaterial3D_kytes")

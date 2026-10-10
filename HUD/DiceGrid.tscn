@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://ctk2ctwsohy6s"]
+
+[ext_resource type="PackedScene" uid="uid://ceg1akbnruav2" path="res://HUD/DisplayDie.tscn" id="1_5e72a"]
+[ext_resource type="Script" uid="uid://djb4jjskfxhme" path="res://HUD/dice_grid.gd" id="1_24owp"]
+
+[node name="DiceGrid" type="Control" unique_id=33086084 node_paths=PackedStringArray("dice_container")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_24owp")
+die_scene = ExtResource("1_5e72a")
+dice_container = NodePath("ColorRect/CenterContainer/GridContainer")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1764386472]
+custom_minimum_size = Vector2(1280, 720)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.078431375, 0.078431375, 0.078431375, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="ColorRect" unique_id=1955158261]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="GridContainer" type="GridContainer" parent="ColorRect/CenterContainer" unique_id=1966080853]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/h_separation = 7
+theme_override_constants/v_separation = 7
+columns = 2
