@@ -3,3 +3,6 @@
 [ext_resource type="PackedScene" uid="uid://dj8nuujhrtom3" path="res://ModelScenes/ceiling.glb" id="1_6b5tw"]
 
 [node name="ceiling" unique_id=365944530 instance=ExtResource("1_6b5tw")]
+
+[node name="Cube" parent="." index="0" unique_id=1640957829]
+transform = Transform3D(1, 0, 0, 0, 0.025, 0, 0, 0, 1, 0, 0, 0)

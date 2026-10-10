@@ -1,6 +1,9 @@
 class_name LevelManager
 extends Node3D
 
+@export var player: Player
+@export var enemy_spawn_points: Array[Marker3D]
+
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 

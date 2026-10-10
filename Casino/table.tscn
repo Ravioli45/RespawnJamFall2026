@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://rxjoqn01nxct"]
+
+[ext_resource type="PackedScene" uid="uid://m1sjpdpnrj3t" path="res://ModelScenes/table.tscn" id="1_3fkoy"]
+[ext_resource type="PackedScene" uid="uid://xv5yv141ixnv" path="res://Components/Hurtbox/hurtbox_component.tscn" id="2_inqel"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_olvt3"]
+height = 0.8034668
+radius = 0.4482422
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_qf4h4"]
+height = 0.8828125
+radius = 0.48388672
+
+[node name="Table" type="StaticBody3D" unique_id=2114148523]
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1795354271]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3876648, 0.0028076172)
+shape = SubResource("CylinderShape3D_olvt3")
+
+[node name="Table" parent="." unique_id=1368049122 instance=ExtResource("1_3fkoy")]
+
+[node name="HurtboxComponent" parent="." unique_id=1539489579 instance=ExtResource("2_inqel")]
+collision_layer = 16
+collision_mask = 10
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HurtboxComponent" unique_id=366559148]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3876648, 0.0028076172)
+shape = SubResource("CylinderShape3D_qf4h4")
+
+[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="." unique_id=1115275333]
+height = 1.5
+vertices = PackedVector3Array(-0.26428783, 0, -0.33944434, -0.29011595, 0, 0.34684592, 0.32237983, 0, 0.3173281, 0.28179264, 0, -0.35051355)
+affect_navigation_mesh = true
+avoidance_enabled = false

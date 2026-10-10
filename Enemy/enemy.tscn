@@ -3,6 +3,14 @@
 [ext_resource type="PackedScene" uid="uid://yipaqaa864e4" path="res://ModelScenes/Enemy.tscn" id="1_2pb1h"]
 [ext_resource type="Script" uid="uid://bpku7rqjlql2r" path="res://Enemy/enemy.gd" id="1_px1sc"]
 [ext_resource type="Material" uid="uid://xog4rh7dniey" path="res://Enemy/frozen_material.tres" id="2_am0pq"]
+[ext_resource type="Script" uid="uid://bd1oo4b6c1b01" path="res://Components/Health/health_component.gd" id="4_ncf7h"]
+[ext_resource type="PackedScene" uid="uid://xv5yv141ixnv" path="res://Components/Hurtbox/hurtbox_component.tscn" id="5_m6jha"]
+[ext_resource type="PackedScene" uid="uid://cs7tjf8qwgqng" path="res://Components/Velocity/velocity_component.tscn" id="6_m6jha"]
+[ext_resource type="PackedScene" uid="uid://bb4xkujym618n" path="res://Components/Hitbox/hitbox_component.tscn" id="7_glvfu"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_am0pq"]
+radius = 0.1
+height = 1.0
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ddld8"]
 emission_shape = 3
@@ -21,27 +29,83 @@ material = SubResource("StandardMaterial3D_40tcv")
 radius = 0.05
 height = 0.1
 
-[node name="Enemy" type="CharacterBody3D" unique_id=1516501594 node_paths=PackedStringArray("body", "poison_particles")]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0rspp"]
+animation = &"Attack"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_glvfu"]
+animation = &"Hurt"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_am0pq"]
+animation = &"Run"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_eqilm"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0rspp"]
+advance_mode = 2
+advance_expression = "state == EnemyState.Hurt"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_efk13"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_nmr1a"]
+advance_mode = 2
+advance_expression = "state == EnemyState.Attacking"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_47ove"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_wm55w"]
+states/Attack/node = SubResource("AnimationNodeAnimation_0rspp")
+states/Attack/position = Vector2(443, 273)
+states/Hurt/node = SubResource("AnimationNodeAnimation_glvfu")
+states/Hurt/position = Vector2(421, 42)
+states/Run/node = SubResource("AnimationNodeAnimation_am0pq")
+states/Run/position = Vector2(315, 144)
+states/Start/position = Vector2(123, 144)
+transitions = ["Start", "Run", SubResource("AnimationNodeStateMachineTransition_eqilm"), "Run", "Hurt", SubResource("AnimationNodeStateMachineTransition_0rspp"), "Hurt", "Run", SubResource("AnimationNodeStateMachineTransition_efk13"), "Run", "Attack", SubResource("AnimationNodeStateMachineTransition_nmr1a"), "Attack", "Run", SubResource("AnimationNodeStateMachineTransition_47ove")]
+graph_offset = Vector2(-95, -40)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wm55w"]
+radius = 0.15
+height = 1.1
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wm55w"]
+size = Vector3(0.3, 0.8903252, 0.539)
+
+[sub_resource type="SphereMesh" id="SphereMesh_wm55w"]
+radius = 0.05
+height = 0.1
+
+[node name="Enemy" type="CharacterBody3D" unique_id=1516501594 node_paths=PackedStringArray("body", "poison_particles", "navigation_agent")]
+collision_layer = 4
+collision_mask = 21
 script = ExtResource("1_px1sc")
 body = NodePath("Enemy/Armature/Skeleton3D/Cylinder_004")
 frozen_material = ExtResource("2_am0pq")
 poison_particles = NodePath("PoisonParticles")
+speed = 2.5
+navigation_agent = NodePath("NavigationAgent3D")
+
+[node name="EnemyCollision" type="CollisionShape3D" parent="." unique_id=875853842]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.004802108, 0)
+shape = SubResource("CapsuleShape3D_am0pq")
 
 [node name="Enemy" parent="." unique_id=511010101 instance=ExtResource("1_2pb1h")]
+transform = Transform3D(-5.2453664e-09, 0, 0.12, 0, 0.12, 0, -0.12, 0, -5.2453664e-09, 0, -0.5, 0)
 
-[node name="Skeleton3D" parent="Enemy/Armature" parent_id_path=PackedInt32Array(511010101, 360008215) index="0" unique_id=1245711315]
-bones/6/rotation = Quaternion(-0.0032078521, 0.00941, 0.38919201, 0.92110294)
-bones/7/rotation = Quaternion(0.0008889035, 0.0023210861, 0.32416677, 0.9459967)
-bones/8/rotation = Quaternion(-0.053644657, -0.71229696, 0.0027854105, 0.6998197)
-bones/10/rotation = Quaternion(0.0022091405, 8.6305334e-08, 0.091679566, 0.99578613)
-bones/11/rotation = Quaternion(-1.7378743e-06, 3.3067916e-08, -7.213105e-05, 1)
-bones/12/rotation = Quaternion(-0.00014032966, 1.4667822e-07, -0.0058237673, 0.99998313)
-bones/14/rotation = Quaternion(-0.37799078, 0.023874134, 0.058338914, 0.923661)
-bones/15/rotation = Quaternion(0.0034242957, -1.6588318e-07, -0.12582302, 0.9920469)
-bones/16/rotation = Quaternion(0.0011980537, 7.566749e-05, 0.6490501, 0.76074475)
-bones/19/rotation = Quaternion(-0.37799078, -0.023874134, -0.058338914, 0.923661)
-bones/20/rotation = Quaternion(0.0034242957, 1.6588318e-07, 0.12582302, 0.9920469)
-bones/21/rotation = Quaternion(0.0011980537, -7.566749e-05, -0.6490501, 0.76074475)
+[node name="Skeleton3D" parent="Enemy/Armature" parent_id_path=PackedInt32Array(511010101, 1541835374) index="0" unique_id=339976389]
+bones/6/rotation = Quaternion(0.173139, 0.22521126, 0.3754051, 0.88225496)
+bones/7/rotation = Quaternion(0.14397095, 0.040493313, 0.32034, 0.9354224)
+bones/10/rotation = Quaternion(-0.16518044, 0.52003956, -0.4212222, 0.7244626)
+bones/11/rotation = Quaternion(0.29580745, -0.14069965, -0.15311386, 0.93234)
+bones/14/rotation = Quaternion(-0.35707074, 0.15068568, 0.3264923, 0.86208886)
+bones/15/rotation = Quaternion(0.010781133, 0.0015000157, -0.2655391, 0.96403867)
+bones/16/rotation = Quaternion(0.010154628, -0.0035721185, 0.44735813, 0.8942901)
+bones/19/rotation = Quaternion(-0.36153316, 0.13426515, 0.28919396, 0.8761471)
+bones/20/rotation = Quaternion(-0.00081691024, -0.00028121527, 0.23472556, 0.97206134)
 
 [node name="PoisonParticles" type="GPUParticles3D" parent="." unique_id=1533864931]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8908751, 0)
@@ -51,5 +115,50 @@ lifetime = 0.2
 speed_scale = 0.1
 process_material = SubResource("ParticleProcessMaterial_ddld8")
 draw_pass_1 = SubResource("SphereMesh_b6c64")
+
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=1146536973]
+root_node = NodePath("../Enemy")
+tree_root = SubResource("AnimationNodeStateMachine_wm55w")
+advance_expression_base_node = NodePath("..")
+anim_player = NodePath("../Enemy/AnimationPlayer")
+
+[node name="HealthComponent" type="Node" parent="." unique_id=1781857222]
+script = ExtResource("4_ncf7h")
+metadata/_custom_type_script = "uid://bd1oo4b6c1b01"
+
+[node name="HurtboxComponent" parent="." unique_id=1539489579 node_paths=PackedStringArray("health") instance=ExtResource("5_m6jha")]
+collision_mask = 2
+health = NodePath("../HealthComponent")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HurtboxComponent" unique_id=482824425]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.049360216, 0)
+shape = SubResource("CapsuleShape3D_wm55w")
+
+[node name="HitboxComponent" parent="." unique_id=1599040273 instance=ExtResource("7_glvfu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.23196197, 0.09649566, 0)
+collision_layer = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitboxComponent" unique_id=386021401]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0881626, 0)
+shape = SubResource("BoxShape3D_wm55w")
+
+[node name="VelocityComponent" parent="." unique_id=1608667117 node_paths=PackedStringArray("target") instance=ExtResource("6_m6jha")]
+target = NodePath("..")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=138778844]
+path_desired_distance = 0.4
+target_desired_distance = 0.5
+max_speed = 2.5
+debug_enabled = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=644102324]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.32449764, 0.3409164, 0)
+visible = false
+mesh = SubResource("SphereMesh_wm55w")
+
+[connection signal="animation_finished" from="AnimationTree" to="." method="_on_animation_finished"]
+[connection signal="died" from="HealthComponent" to="." method="_on_died"]
+[connection signal="hurt" from="HurtboxComponent" to="." method="_on_hurt"]
+[connection signal="hit" from="HitboxComponent" to="." method="_on_hit"]
 
 [editable path="Enemy"]

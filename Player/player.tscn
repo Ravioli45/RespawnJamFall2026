@@ -10,8 +10,10 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wm55w"]
 radius = 0.4
+height = 1.0
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_olvt3"]
+height = 1.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vtle1"]
 content_margin_left = 0.0
@@ -24,9 +26,10 @@ corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 
-[node name="Player" type="CharacterBody3D" unique_id=1423276027 node_paths=PackedStringArray("head", "weapon", "dice_grid")]
+[node name="Player" type="CharacterBody3D" unique_id=1423276027 node_paths=PackedStringArray("interact_raycast", "head", "weapon", "dice_grid")]
 collision_mask = 28
 script = ExtResource("1_l8h54")
+interact_raycast = NodePath("RayCast3D")
 head = NodePath("Pivot")
 speed = 5.0
 jump_strength = 5.0
@@ -36,6 +39,40 @@ dice_grid = NodePath("PanelContainer/DiceGrid")
 
 [node name="PlayerShape" type="CollisionShape3D" parent="." unique_id=1811466163]
 shape = SubResource("CapsuleShape3D_wm55w")
+
+[node name="Pivot" type="Node3D" parent="." unique_id=1605941767]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.37777448, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Pivot" unique_id=461006806]
+fov = 90.0
+
+[node name="Shotgun" parent="Pivot" unique_id=784934416 node_paths=PackedStringArray("projectile_spawn_position") instance=ExtResource("2_k53q1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1187024, -0.18781997, -0.21)
+projectile_spawn_position = NodePath("../Marker3D")
+
+[node name="Marker3D" type="Marker3D" parent="Pivot" unique_id=1409274533]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.14088899, -0.5394454)
+
+[node name="RayCast3D" type="RayCast3D" parent="." unique_id=777039261]
+target_position = Vector3(0, 0, -0.75)
+collision_mask = 32
+
+[node name="HealthComponent" type="Node" parent="." unique_id=883154550]
+script = ExtResource("2_4ntmi")
+metadata/_custom_type_script = "uid://bd1oo4b6c1b01"
+
+[node name="HurtboxComponent" parent="." unique_id=1539489579 node_paths=PackedStringArray("health") instance=ExtResource("4_k53q1")]
+collision_layer = 1
+collision_mask = 12
+health = NodePath("../HealthComponent")
+
+[node name="HurtboxShape" type="CollisionShape3D" parent="HurtboxComponent" unique_id=1232338552]
+shape = SubResource("CapsuleShape3D_olvt3")
+
+[node name="VelocityComponent" type="Node" parent="." unique_id=1211689721 node_paths=PackedStringArray("target")]
+script = ExtResource("4_gwnis")
+target = NodePath("..")
+metadata/_custom_type_script = "uid://c06frpdbjghyu"
 
 [node name="Crosshair" type="TextureRect" parent="." unique_id=1512235027]
 anchors_preset = 8
@@ -52,33 +89,6 @@ grow_vertical = 2
 scale = Vector2(0.3, 0.3)
 pivot_offset = Vector2(32, 32)
 texture = ExtResource("6_fhl08")
-
-[node name="Pivot" type="Node3D" parent="." unique_id=1605941767]
-
-[node name="Camera3D" type="Camera3D" parent="Pivot" unique_id=461006806]
-fov = 90.0
-
-[node name="Shotgun" parent="Pivot" unique_id=784934416 node_paths=PackedStringArray("projectile_spawn_position") instance=ExtResource("2_k53q1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.235, -0.4, -0.4)
-projectile_spawn_position = NodePath("../Marker3D")
-
-[node name="Marker3D" type="Marker3D" parent="Pivot" unique_id=1409274533]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.9180465)
-
-[node name="HealthComponent" type="Node" parent="." unique_id=883154550]
-script = ExtResource("2_4ntmi")
-metadata/_custom_type_script = "uid://bd1oo4b6c1b01"
-
-[node name="HurtboxComponent" parent="." unique_id=1539489579 node_paths=PackedStringArray("health") instance=ExtResource("4_k53q1")]
-health = NodePath("../HealthComponent")
-
-[node name="HurtboxShape" type="CollisionShape3D" parent="HurtboxComponent" unique_id=1232338552]
-shape = SubResource("CapsuleShape3D_olvt3")
-
-[node name="VelocityComponent" type="Node" parent="." unique_id=1211689721 node_paths=PackedStringArray("target")]
-script = ExtResource("4_gwnis")
-target = NodePath("..")
-metadata/_custom_type_script = "uid://c06frpdbjghyu"
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=933332466]
 clip_children = 1

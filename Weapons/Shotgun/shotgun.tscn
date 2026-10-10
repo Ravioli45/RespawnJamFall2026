@@ -141,13 +141,10 @@ wait_time = 0.5
 one_shot = true
 
 [node name="Shotgun" parent="." unique_id=63231070 instance=ExtResource("2_lwqk7")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
-
-[node name="Cube_001" parent="Shotgun/Cube" parent_id_path=PackedInt32Array(63231070, 439382938) index="0" unique_id=227804474]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8322325, 1.5095093, 15.876263)
+transform = Transform3D(-0.5, 0, -7.54979e-08, 0, 0.5, 0, 7.54979e-08, 0, -0.5, 0, 0, 0)
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="Shotgun/Cube" parent_id_path=PackedInt32Array(63231070, 439382938) index="1" unique_id=413466490]
-transform = Transform3D(-33.333336, 0, 2.9140926e-06, 0, 20, 0, -1.7484551e-06, 0, -20, -0.8000592, 1.9829998, 19.315)
+transform = Transform3D(-33.333336, 0, 2.9140922e-06, 0, 20, 0, -1.748455e-06, 0, -20, -0.8000594, 1.9829998, 19.865086)
 emitting = false
 lifetime = 0.2
 one_shot = true

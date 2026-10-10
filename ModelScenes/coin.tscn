@@ -3,3 +3,6 @@
 [ext_resource type="PackedScene" uid="uid://1gcxn5tn1a6c" path="res://ModelScenes/coin.glb" id="1_vou8m"]
 
 [node name="coin" unique_id=1414749562 instance=ExtResource("1_vou8m")]
+
+[node name="Cylinder" parent="." index="0" unique_id=1627568209]
+transform = Transform3D(0.05, 0, 0, 0, 0.005, 0, 0, 0, 0.05, 0, 0, 0)

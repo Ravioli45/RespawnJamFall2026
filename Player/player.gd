@@ -1,6 +1,10 @@
 class_name Player
 extends CharacterBody3D
 
+signal player_died
+
+@export var interact_raycast: RayCast3D
+
 @export_subgroup("Movement")
 @export var head: Node3D
 @export var speed: float = 0
@@ -27,6 +31,11 @@ func _unhandled_input(event: InputEvent) -> void:
 	elif event.is_action_pressed("shoot") and is_instance_valid(weapon):
 		weapon.shoot()
 		dice_grid.roll_all()
+	elif event.is_action_pressed("interact") and is_instance_valid(interact_raycast):
+		# print("p")
+		var interactable := interact_raycast.get_collider()
+		if interactable is SlotMachine:
+			interactable.interact()
 
 func _physics_process(delta: float) -> void:
 	var target_velocity = Vector3(0, velocity.y, 0)
@@ -48,7 +57,7 @@ func _physics_process(delta: float) -> void:
 
 func _on_died() -> void:
 	print("player died")
-	# TODO: replace with game over logic
+	player_died.emit()
 
 func _on_health_changed(old_health: Variant, new_health: Variant) -> void:
 	print("player took " + str(old_health - new_health) + " damage")

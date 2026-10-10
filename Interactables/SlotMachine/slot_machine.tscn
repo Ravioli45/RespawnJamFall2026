@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://bwr2pbwdye1ic"]
+
+[ext_resource type="Script" uid="uid://k30fb8ohhruo" path="res://Interactables/SlotMachine/slot_machine.gd" id="1_nl070"]
+[ext_resource type="PackedScene" uid="uid://xv5yv141ixnv" path="res://Components/Hurtbox/hurtbox_component.tscn" id="2_akott"]
+[ext_resource type="PackedScene" uid="uid://dut2ly3audjdv" path="res://ModelScenes/SlotMachine.glb" id="2_gvwk0"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wm55w"]
+size = Vector3(0.36743164, 1.0454102, 0.24365234)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_v3ne4"]
+size = Vector3(0.47753906, 1.0996094, 0.3515625)
+
+[node name="SlotMachine" type="StaticBody3D" unique_id=795938273 node_paths=PackedStringArray("animation_player")]
+collision_layer = 48
+collision_mask = 0
+script = ExtResource("1_nl070")
+animation_player = NodePath("SlotMachine/AnimationPlayer")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=289885049]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5270996, 0.0075683594)
+shape = SubResource("BoxShape3D_wm55w")
+
+[node name="HurtboxComponent" parent="." unique_id=1539489579 instance=ExtResource("2_akott")]
+collision_layer = 48
+collision_mask = 10
+
+[node name="HurtboxShape" type="CollisionShape3D" parent="HurtboxComponent" unique_id=1278163398]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5270996, 0.0075683594)
+shape = SubResource("BoxShape3D_v3ne4")
+
+[node name="SlotMachine" parent="." unique_id=235045621 instance=ExtResource("2_gvwk0")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+
+[connection signal="animation_finished" from="SlotMachine/AnimationPlayer" to="." method="_on_animation_finished"]
+
+[editable path="SlotMachine"]
