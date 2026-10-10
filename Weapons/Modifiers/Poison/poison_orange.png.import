@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://n5co3p3chfrs"
-path="res://.godot/imported/explosion_orange.png-9504beca511ac48a5c36679d94d3685e.ctex"
+uid="uid://c112pwidst60n"
+path="res://.godot/imported/poison_orange.png-60d0ea77254c03d122d3552e383551b4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Weapons/Modifiers/explosion_orange.png"
-dest_files=["res://.godot/imported/explosion_orange.png-9504beca511ac48a5c36679d94d3685e.ctex"]
+source_file="res://Weapons/Modifiers/Poison/poison_orange.png"
+dest_files=["res://.godot/imported/poison_orange.png-60d0ea77254c03d122d3552e383551b4.ctex"]
 
 [params]
 

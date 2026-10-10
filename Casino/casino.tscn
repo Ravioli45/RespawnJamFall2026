@@ -114,7 +114,7 @@ spot_range = 20.0
 spot_angle = 75.0
 
 [node name="Player" parent="." unique_id=1423276027 instance=ExtResource("2_pvja2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5693383, 10.811504)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 10.811504)
 
 [node name="Enemy" parent="." unique_id=1516501594 node_paths=PackedStringArray("player") instance=ExtResource("5_mlntv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.87329, 0.5006397, -0.63140583)

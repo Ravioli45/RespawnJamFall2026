@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b4pf1ugdddc3"
-path="res://.godot/imported/explosion_green.png-7da5356a612fc9b4e5814253877ebc01.ctex"
+uid="uid://x101sp658t4b"
+path="res://.godot/imported/poison_red.png-8cfc0ed14d15592a49a8d86345ae3b04.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Weapons/Modifiers/explosion_green.png"
-dest_files=["res://.godot/imported/explosion_green.png-7da5356a612fc9b4e5814253877ebc01.ctex"]
+source_file="res://Weapons/Modifiers/Poison/poison_red.png"
+dest_files=["res://.godot/imported/poison_red.png-8cfc0ed14d15592a49a8d86345ae3b04.ctex"]
 
 [params]
 

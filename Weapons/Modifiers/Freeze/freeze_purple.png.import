@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b5jw8epod1qua"
-path="res://.godot/imported/explosion_blue.png-752984697a2c7c5116ad202c5654ebc1.ctex"
+uid="uid://baxwnlr2x7jh3"
+path="res://.godot/imported/freeze_purple.png-e45e2899264a9f1aa48cf5baf3e3f943.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Weapons/Modifiers/explosion_blue.png"
-dest_files=["res://.godot/imported/explosion_blue.png-752984697a2c7c5116ad202c5654ebc1.ctex"]
+source_file="res://Weapons/Modifiers/Freeze/freeze_purple.png"
+dest_files=["res://.godot/imported/freeze_purple.png-e45e2899264a9f1aa48cf5baf3e3f943.ctex"]
 
 [params]
 
