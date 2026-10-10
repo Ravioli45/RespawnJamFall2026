@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://mhwknwcd76j1"]
+
+[sub_resource type="Gradient" id="Gradient_pf6px"]
+offsets = PackedFloat32Array(0, 0.2934028, 0.6857639, 1)
+colors = PackedColorArray(1, 0, 0, 1, 1, 0.39607844, 0, 1, 1, 0.42745098, 0, 1, 1, 1, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_nygmv"]
+gradient = SubResource("Gradient_pf6px")
+
+[sub_resource type="Curve" id="Curve_nygmv"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_pf6px"]
+curve = SubResource("Curve_nygmv")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pf6px"]
+direction = Vector3(0, 1, 0)
+spread = 66.207
+initial_velocity_max = 20.13
+angular_velocity_min = -1.6093254e-05
+angular_velocity_max = 24.159983
+scale_curve = SubResource("CurveTexture_pf6px")
+color_ramp = SubResource("GradientTexture1D_nygmv")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dlij2"]
+vertex_color_use_as_albedo = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_nygmv"]
+material = SubResource("StandardMaterial3D_dlij2")
+radius = 0.25
+height = 0.5
+
+[node name="Explosion" type="GPUParticles3D" unique_id=2056130392]
+emitting = false
+amount = 100
+sub_emitter = NodePath(".")
+lifetime = 0.21000000000000002
+one_shot = true
+speed_scale = 0.9
+explosiveness = 1.0
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_pf6px")
+draw_pass_1 = SubResource("SphereMesh_nygmv")

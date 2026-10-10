@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://m1sjpdpnrj3t"]
+
+[ext_resource type="PackedScene" uid="uid://bebillvqirdr7" path="res://ModelScenes/Table.glb" id="1_flcil"]
+
+[node name="Table" unique_id=1368049122 instance=ExtResource("1_flcil")]
+transform = Transform3D(0.099, 0, 0, 0, 0.099, 0, 0, 0, 0.099, 0, 0, 0)

@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://b2f8tj412gale"]
+
+[ext_resource type="PackedScene" uid="uid://dut2ly3audjdv" path="res://ModelScenes/SlotMachine.glb" id="1_g7852"]
+
+[node name="SlotMachine" unique_id=535272261 instance=ExtResource("1_g7852")]
+transform = Transform3D(0.105, 0, 0, 0, 0.105, 0, 0, 0, 0.105, 0, 0, 0)
