@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://bp6q5l34dv1d1"]
+
+[ext_resource type="PackedScene" uid="uid://dj8nuujhrtom3" path="res://ModelScenes/ceiling.glb" id="1_6b5tw"]
+
+[node name="ceiling" unique_id=365944530 instance=ExtResource("1_6b5tw")]

@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://r0ir7nxpg4uo"]
+
+[ext_resource type="PackedScene" uid="uid://1gcxn5tn1a6c" path="res://ModelScenes/coin.glb" id="1_vou8m"]
+
+[node name="coin" unique_id=1414749562 instance=ExtResource("1_vou8m")]
