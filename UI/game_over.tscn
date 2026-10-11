@@ -98,6 +98,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_fmr02")
 text = "Quit"
 
 [node name="PauseMenu" parent="." unique_id=1717326633 instance=ExtResource("2_3y5qq")]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

@@ -86,6 +86,7 @@ collision_mask = 32
 
 [node name="HealthComponent" type="Node" parent="." unique_id=883154550]
 script = ExtResource("2_4ntmi")
+health = 20
 metadata/_custom_type_script = "uid://bd1oo4b6c1b01"
 
 [node name="HurtboxComponent" parent="." unique_id=1539489579 node_paths=PackedStringArray("health") instance=ExtResource("4_k53q1")]

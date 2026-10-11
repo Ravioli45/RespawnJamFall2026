@@ -4,16 +4,20 @@ extends Node3D
 @export var player: Player
 @export var enemy_spawn_points: Array[Marker3D]
 @export var enemy_packed_scene: PackedScene
+@export var pause_menu: ColorRect
 
 func _ready() -> void:
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-
+	capture_mouse()
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
-		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE	
+		release_mouse()
+		if pause_menu:
+			pause_menu.show()
 	elif event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
-		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+		capture_mouse()
+		if pause_menu:
+			pause_menu.hide()
 
 func spawn_enemy() -> void:
 	if not enemy_packed_scene:
@@ -24,3 +28,13 @@ func spawn_enemy() -> void:
 	new_enemy.position = selected_spawn_position
 	new_enemy.player = player
 	add_child(new_enemy)
+
+func end_game() -> void:
+	release_mouse()
+	get_tree().call_deferred("change_scene_to_file", "uid://c2waut6v2tex6")
+
+func capture_mouse() -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
+func release_mouse() -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
