@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://231x8wvo4cqf"]
+
+[ext_resource type="Script" uid="uid://cykyns1del5no" path="res://Weapons/Modifiers/Explosion/explosion.gd" id="1_1v6u0"]
+[ext_resource type="PackedScene" uid="uid://mhwknwcd76j1" path="res://ModelScenes/explosion.tscn" id="1_x7gaw"]
+[ext_resource type="PackedScene" uid="uid://bb4xkujym618n" path="res://Components/Hitbox/hitbox_component.tscn" id="2_sl6nq"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_wm55w"]
+radius = 1.5
+
+[node name="Explosion" type="Node3D" unique_id=946077276]
+script = ExtResource("1_1v6u0")
+
+[node name="HitboxComponent" parent="." unique_id=1599040273 instance=ExtResource("2_sl6nq")]
+collision_mask = 4
+damage = 10
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitboxComponent" unique_id=1063558961]
+shape = SubResource("SphereShape3D_wm55w")
+
+[node name="Explosion" parent="." unique_id=2056130392 instance=ExtResource("1_x7gaw")]
+
+[connection signal="finished" from="Explosion" to="." method="_on_explosion_finished"]

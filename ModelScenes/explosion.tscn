@@ -34,7 +34,6 @@ height = 0.5
 [node name="Explosion" type="GPUParticles3D" unique_id=2056130392]
 emitting = false
 amount = 100
-sub_emitter = NodePath(".")
 lifetime = 0.21
 one_shot = true
 speed_scale = 0.9

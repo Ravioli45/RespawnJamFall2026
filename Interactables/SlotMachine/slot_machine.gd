@@ -20,19 +20,42 @@ func interact(player: Player) -> void:
 	if not can_spin:
 		return
 	can_spin = false
+
+	player.coins -= 5
 	
 	for i in chosen_slots.size():
 		chosen_slots[i] = pick_slot()
 	
 	animation_player.play("Spin")
 	for slot in slots:
+		slot.frame = pick_slot()
 		slot.play("spin")
 	
 	slot_timer.start()
 
 	await spin_finished
-	player.new_dice()
-	
+
+	var rand := randf()
+
+	if rand < 0.5:
+		var display_indices := range(total_slots)
+		display_indices.shuffle()
+		display_indices = display_indices.slice(0, 3)
+		for i in range(3):
+			slots[i].frame = display_indices[i]
+	elif rand < 0.9:
+		var reward: ModifierTable.ModifierFlags= ModifierTable.all.pick_random()
+		match reward:
+			ModifierTable.ModifierFlags.Explosive:
+				for i in range(slots.size()):
+					slots[i].frame = 15
+				player.new_modifier(reward)
+			_:
+				pass
+	else:
+		player.new_dice()
+		for i in range(slots.size()):
+			slots[i].frame = 22
 
 
 func _on_animation_finished(anim_name: StringName) -> void:

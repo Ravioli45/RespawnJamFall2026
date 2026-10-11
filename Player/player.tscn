@@ -54,6 +54,7 @@ corner_radius_bottom_left = 3
 collision_mask = 28
 script = ExtResource("1_l8h54")
 interact_raycast = NodePath("RayCast3D")
+coins = 1000
 health_bar = NodePath("ProgressBar")
 coin_label = NodePath("CoinLabel")
 head = NodePath("Pivot")

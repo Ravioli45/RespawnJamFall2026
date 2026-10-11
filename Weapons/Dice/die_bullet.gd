@@ -22,8 +22,8 @@ func _physics_process(_delta: float) -> void:
 	velocity = -transform.basis.z.normalized() * speed
 
 func _on_hit(hurtbox: HurtboxComponent) -> void:
-	print("dice hit something for " + str(damage) + " damage")
-
+	print("dice hit something for " + str(damage) + " damage. With modifier: " + str(modifiers))
+	
 	#if modifiers & ModifierTable.ModifierFlags.Explosive != 0:
 		#ModifierTable.modifiers[ModifierTable.ModifierFlags.Explosive].call(self)
 

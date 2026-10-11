@@ -43,7 +43,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		# print("p")
 		var interactable := interact_raycast.get_collider()
 		if interactable is SlotMachine and coins >= 5:
-			coins -= 5
+			# coins -= 5
 			interactable.interact(self)
 			# TODO: update HUD
 
@@ -69,6 +69,11 @@ func new_dice():
 	weapon.add_dice()
 	dice_grid.add_dice(weapon.dice_data[-1].faces[0])
 
+func new_modifier(modifier: ModifierTable.ModifierFlags):
+	for face in weapon.current_faces:
+		face.add_modifiers(modifier)
+	dice_grid.show_faces(weapon.current_faces)
+
 func _on_died() -> void:
 	print("player died")
 	player_died.emit()
@@ -80,7 +85,7 @@ func _on_health_changed(old_health: int, new_health: int) -> void:
 	# TODO: replace with player take damage logic
 
 func _on_reloaded():
-	print("reloaded")
+	# print("reloaded")
 	#print(weapon.current_faces)
 	dice_grid.show_faces(weapon.current_faces)
 	pass
