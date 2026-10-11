@@ -26,6 +26,7 @@ signal player_died
 @export var dice_grid: DiceGrid
 
 func _ready() -> void:
+	coins = coins
 	#dice_grid.show_faces(weapon.current_faces)
 	for f in weapon.current_faces:
 		dice_grid.add_dice(f)

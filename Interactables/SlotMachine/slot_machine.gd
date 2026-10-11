@@ -36,6 +36,7 @@ func interact(player: Player) -> void:
 	await spin_finished
 
 	var rand := randf()
+	# rand = 0.6
 
 	if rand < 0.5:
 		var display_indices := range(total_slots)
@@ -45,6 +46,7 @@ func interact(player: Player) -> void:
 			slots[i].frame = display_indices[i]
 	elif rand < 0.9:
 		var reward: ModifierTable.ModifierFlags= ModifierTable.all.pick_random()
+		# reward = ModifierTable.ModifierFlags.Poison
 		match reward:
 			ModifierTable.ModifierFlags.Explosive:
 				for i in range(slots.size()):
@@ -55,9 +57,14 @@ func interact(player: Player) -> void:
 					slots[i].frame = 8
 				player.new_modifier(reward)
 			
-			_:
-				pass
+			ModifierTable.ModifierFlags.Poison:
+				for i in range(slots.size()):
+					slots[i].frame = 16
+				player.new_modifier(reward)
+	
 	else:
+		if player.weapon.dice_data.size() >= 4:
+			return
 		player.new_dice()
 		for i in range(slots.size()):
 			slots[i].frame = 22

@@ -127,7 +127,7 @@ size = Vector3(0.3, 0.8903252, 0.539)
 radius = 0.05
 height = 0.1
 
-[node name="Enemy" type="CharacterBody3D" unique_id=1516501594 node_paths=PackedStringArray("body", "freeze_timer", "poison_particles", "navigation_agent", "animation_tree", "hitbox")]
+[node name="Enemy" type="CharacterBody3D" unique_id=1516501594 node_paths=PackedStringArray("body", "freeze_timer", "poison_particles", "poison_timer", "poison_tick_timer", "health_component", "navigation_agent", "animation_tree", "hitbox")]
 collision_layer = 4
 collision_mask = 21
 script = ExtResource("1_px1sc")
@@ -135,6 +135,9 @@ body = NodePath("Enemy/Armature/Skeleton3D/Cylinder_004")
 frozen_material = ExtResource("2_am0pq")
 freeze_timer = NodePath("FreezeTimer")
 poison_particles = NodePath("PoisonParticles")
+poison_timer = NodePath("PoisonTimer")
+poison_tick_timer = NodePath("PoisonTickTimer")
+health_component = NodePath("HealthComponent")
 speed = 2.5
 navigation_agent = NodePath("NavigationAgent3D")
 animation_tree = NodePath("AnimationTree")
@@ -148,29 +151,23 @@ shape = SubResource("CapsuleShape3D_am0pq")
 [node name="Enemy" parent="." unique_id=511010101 instance=ExtResource("1_2pb1h")]
 transform = Transform3D(-5.2453664e-09, 0, 0.12, 0, 0.12, 0, -0.12, 0, -5.2453664e-09, 0, -0.5, 0)
 
-[node name="Skeleton3D" parent="Enemy/Armature" parent_id_path=PackedInt32Array(511010101, 246214325) index="0" unique_id=1037917352]
-bones/1/rotation = Quaternion(0, -0.0044641364, 0, 0.99999005)
-bones/6/rotation = Quaternion(0.0022091423, -8.6519194e-08, -0.09167956, 0.99578613)
-bones/7/rotation = Quaternion(-1.737696e-06, -3.399256e-08, 7.212354e-05, 1)
-bones/8/rotation = Quaternion(-0.00014032969, -1.4668339e-07, 0.0058237663, 0.999983)
-bones/10/rotation = Quaternion(0.0022091405, 8.585428e-08, 0.09167956, 0.99578613)
-bones/11/rotation = Quaternion(-1.7378718e-06, 3.306492e-08, -7.213108e-05, 1)
-bones/12/rotation = Quaternion(-0.00014032968, 1.4622138e-07, -0.0058237654, 0.999983)
-bones/13/rotation = Quaternion(0.6562473, -0.26332405, -0.65624726, -0.263324)
-bones/14/rotation = Quaternion(-0.37799072, 0.023874132, 0.05833891, 0.923661)
-bones/15/rotation = Quaternion(0.0034242955, -1.6588695e-07, -0.125823, 0.9920468)
-bones/16/rotation = Quaternion(0.0011980537, 7.566746e-05, 0.6490502, 0.7607447)
-bones/18/rotation = Quaternion(0.6562473, 0.26332405, 0.65624726, -0.263324)
-bones/19/rotation = Quaternion(-0.37799072, -0.023874132, -0.05833891, 0.923661)
-bones/20/rotation = Quaternion(0.0034242955, 1.6588695e-07, 0.125823, 0.9920468)
-bones/21/rotation = Quaternion(0.0011980537, -7.566746e-05, -0.6490502, 0.7607447)
+[node name="Skeleton3D" parent="Enemy/Armature" parent_id_path=PackedInt32Array(511010101, 1870900948) index="0" unique_id=1681649260]
+bones/6/rotation = Quaternion(0.2030568, 0.30078927, 0.3663023, 0.8568059)
+bones/7/rotation = Quaternion(0.24802312, 0.06822007, 0.31717676, 0.9128141)
+bones/10/rotation = Quaternion(-0.20260468, 0.7043757, -0.41752222, 0.5371048)
+bones/11/rotation = Quaternion(0.49192432, -0.19408298, -0.01742641, 0.84855086)
+bones/14/rotation = Quaternion(-0.34674805, 0.17806543, 0.39960712, 0.82968235)
+bones/15/rotation = Quaternion(0.013462892, 0.0028274818, -0.3600741, 0.93282235)
+bones/16/rotation = Quaternion(0.016136141, -0.006028143, 0.28878492, 0.95723903)
+bones/19/rotation = Quaternion(-0.34376064, 0.18160471, 0.4134642, 0.82334423)
+bones/20/rotation = Quaternion(-0.0037705828, -0.00047552545, 0.30901423, 0.9510499)
 
 [node name="PoisonParticles" type="GPUParticles3D" parent="." unique_id=1533864931]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8908751, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25701106, 0)
 emitting = false
-amount = 2
 lifetime = 0.2
 speed_scale = 0.1
+local_coords = true
 process_material = SubResource("ParticleProcessMaterial_ddld8")
 draw_pass_1 = SubResource("SphereMesh_b6c64")
 
@@ -220,10 +217,18 @@ mesh = SubResource("SphereMesh_wm55w")
 wait_time = 2.0
 one_shot = true
 
+[node name="PoisonTimer" type="Timer" parent="." unique_id=488095560]
+wait_time = 5.0
+one_shot = true
+
+[node name="PoisonTickTimer" type="Timer" parent="." unique_id=1408893459]
+
 [connection signal="animation_finished" from="AnimationTree" to="." method="_on_animation_finished"]
 [connection signal="died" from="HealthComponent" to="." method="_on_died"]
 [connection signal="hurt" from="HurtboxComponent" to="." method="_on_hurt"]
 [connection signal="hit" from="HitboxComponent" to="." method="_on_hit"]
 [connection signal="timeout" from="FreezeTimer" to="." method="_on_freeze_timeout"]
+[connection signal="timeout" from="PoisonTimer" to="." method="_on_poison_timout"]
+[connection signal="timeout" from="PoisonTickTimer" to="." method="_on_poison_tick_stimeout"]
 
 [editable path="Enemy"]

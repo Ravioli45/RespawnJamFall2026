@@ -54,47 +54,6 @@ script = ExtResource("3_ifwlu")
 faces = Array[ExtResource("4_6eg5q")]([SubResource("Resource_no02n"), SubResource("Resource_6fgau"), SubResource("Resource_kvad6"), SubResource("Resource_buifp"), SubResource("Resource_j85yk"), SubResource("Resource_oms4c")])
 metadata/_custom_type_script = "uid://3u06ynf86tg3"
 
-[sub_resource type="Resource" id="Resource_5b5cd"]
-script = ExtResource("4_6eg5q")
-value = 1
-face_texture = ExtResource("5_aiulw")
-metadata/_custom_type_script = "uid://cqvc6e1fuo3ls"
-
-[sub_resource type="Resource" id="Resource_4i01s"]
-script = ExtResource("4_6eg5q")
-value = 2
-face_texture = ExtResource("6_v04ei")
-metadata/_custom_type_script = "uid://cqvc6e1fuo3ls"
-
-[sub_resource type="Resource" id="Resource_bebg0"]
-script = ExtResource("4_6eg5q")
-value = 3
-face_texture = ExtResource("7_lpe6n")
-metadata/_custom_type_script = "uid://cqvc6e1fuo3ls"
-
-[sub_resource type="Resource" id="Resource_rqbb4"]
-script = ExtResource("4_6eg5q")
-value = 4
-face_texture = ExtResource("8_6sp5e")
-metadata/_custom_type_script = "uid://cqvc6e1fuo3ls"
-
-[sub_resource type="Resource" id="Resource_nbeli"]
-script = ExtResource("4_6eg5q")
-value = 5
-face_texture = ExtResource("9_rl4sf")
-metadata/_custom_type_script = "uid://cqvc6e1fuo3ls"
-
-[sub_resource type="Resource" id="Resource_irxtu"]
-script = ExtResource("4_6eg5q")
-value = 6
-face_texture = ExtResource("10_uy0yp")
-metadata/_custom_type_script = "uid://cqvc6e1fuo3ls"
-
-[sub_resource type="Resource" id="Resource_ho3sj"]
-script = ExtResource("3_ifwlu")
-faces = Array[ExtResource("4_6eg5q")]([SubResource("Resource_5b5cd"), SubResource("Resource_4i01s"), SubResource("Resource_bebg0"), SubResource("Resource_rqbb4"), SubResource("Resource_nbeli"), SubResource("Resource_irxtu")])
-metadata/_custom_type_script = "uid://3u06ynf86tg3"
-
 [sub_resource type="Gradient" id="Gradient_v04ei"]
 colors = PackedColorArray(0.99999994, 0.5802401, 0.17385134, 1, 0.2803557, 0.17190513, 4.813075e-08, 1)
 
@@ -132,7 +91,7 @@ animation_player = NodePath("Shotgun/AnimationPlayer")
 muzzle_particles = NodePath("Shotgun/Cube/GPUParticles3D")
 projectile = ExtResource("2_e1bfy")
 spread = 0.2
-dice_data = Array[ExtResource("3_ifwlu")]([SubResource("Resource_2am64"), SubResource("Resource_ho3sj")])
+dice_data = Array[ExtResource("3_ifwlu")]([SubResource("Resource_2am64")])
 default_dice = ExtResource("11_v04ei")
 
 [node name="ReloadTimer" type="Timer" parent="." unique_id=2112447287]

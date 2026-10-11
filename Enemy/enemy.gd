@@ -15,6 +15,10 @@ enum EnemyState{
 @export var frozen_material:  StandardMaterial3D
 @export var freeze_timer: Timer
 @export var poison_particles: GPUParticles3D
+@export var poison_timer: Timer
+@export var poison_tick_timer: Timer
+
+@export var health_component: HealthComponent
 
 @export var player: Player
 @export var speed: float = 1
@@ -95,6 +99,8 @@ func get_poisoned() -> void:
 	if not poison_particles:
 		return
 	poison_particles.emitting = true
+	poison_tick_timer.start()
+	poison_timer.start()
 
 
 func _on_died() -> void:
@@ -115,6 +121,7 @@ func _on_died() -> void:
 
 func kill() -> void:
 	state = EnemyState.Dead
+	hitbox.monitoring = false
 
 
 func _on_hurt() -> void:
@@ -155,3 +162,14 @@ func _on_freeze_timeout() -> void:
 		hitbox.monitoring = true
 		
 	#pass # Replace with function body.
+
+
+func _on_poison_timout() -> void:
+	poison_particles.emitting = false
+	poison_tick_timer.stop()
+	pass # Replace with function body.
+
+
+func _on_poison_tick_stimeout() -> void:
+	health_component.take_damage(5)
+	pass # Replace with function body.
