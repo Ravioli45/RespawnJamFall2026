@@ -7,6 +7,10 @@ extends Node3D
 @export var pause_menu: ColorRect
 
 func _ready() -> void:
+	var startingEnemies: int = 2
+	for i in startingEnemies:
+		spawn_enemy()
+		
 	capture_mouse()
 
 func _input(event: InputEvent) -> void:
@@ -14,7 +18,7 @@ func _input(event: InputEvent) -> void:
 		release_mouse()
 		if pause_menu:
 			pause_menu.show()
-	elif event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+	elif event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
 		capture_mouse()
 		if pause_menu:
 			pause_menu.hide()
@@ -27,6 +31,7 @@ func spawn_enemy() -> void:
 	var selected_spawn_position: Vector3 = enemy_spawn_points[randi() % 6].position
 	new_enemy.position = selected_spawn_position
 	new_enemy.player = player
+	new_enemy.enemy_killed.connect(increase_kill_count)
 	add_child(new_enemy)
 
 func end_game() -> void:
@@ -38,3 +43,6 @@ func capture_mouse() -> void:
 
 func release_mouse() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	
+func increase_kill_count() -> void:
+	KillCounter.increase_kills()

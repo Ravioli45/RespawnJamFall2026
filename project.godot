@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 ModifierTable="*uid://bksgcjb7vlyha"
+KillCounter="*uid://cbuoxhujwl7h"
 
 [display]
 

@@ -119,14 +119,6 @@ spot_angle = 75.0
 [node name="Player" parent="." unique_id=1423276027 instance=ExtResource("2_pvja2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 10.811504)
 
-[node name="Enemy" parent="." unique_id=1516501594 node_paths=PackedStringArray("player") instance=ExtResource("5_mlntv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.87329, 0.5006397, -0.63140583)
-player = NodePath("../Player")
-
-[node name="Enemy2" parent="." unique_id=1710332685 node_paths=PackedStringArray("player") instance=ExtResource("5_mlntv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.472592, 0.5006397, 12.642893)
-player = NodePath("../Player")
-
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=103063073]
 navigation_mesh = SubResource("NavigationMesh_wm55w")
 
