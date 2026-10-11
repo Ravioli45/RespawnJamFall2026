@@ -25,6 +25,7 @@ bg_color = Color(0.7943986, 3.2247603e-06, 9.62615e-07, 1)
 bg_color = Color(0.79607844, 0, 0, 1)
 
 [node name="PauseMenu" type="ColorRect" unique_id=1717326633]
+custom_minimum_size = Vector2(398, 268)
 anchors_preset = -1
 anchor_left = 0.34500003
 anchor_top = 0.314

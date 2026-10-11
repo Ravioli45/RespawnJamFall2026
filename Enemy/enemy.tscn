@@ -72,7 +72,7 @@ states/Run/node = SubResource("AnimationNodeAnimation_am0pq")
 states/Run/position = Vector2(315, 144)
 states/Start/position = Vector2(123, 144)
 transitions = ["Start", "Run", SubResource("AnimationNodeStateMachineTransition_eqilm"), "Run", "Hurt", SubResource("AnimationNodeStateMachineTransition_0rspp"), "Hurt", "Run", SubResource("AnimationNodeStateMachineTransition_efk13"), "Run", "Attack", SubResource("AnimationNodeStateMachineTransition_nmr1a"), "Attack", "Run", SubResource("AnimationNodeStateMachineTransition_47ove")]
-graph_offset = Vector2(-49, 11)
+graph_offset = Vector2(-13, 55)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wm55w"]
 radius = 0.15
@@ -104,16 +104,17 @@ shape = SubResource("CapsuleShape3D_am0pq")
 [node name="Enemy" parent="." unique_id=511010101 instance=ExtResource("1_2pb1h")]
 transform = Transform3D(-5.2453664e-09, 0, 0.12, 0, 0.12, 0, -0.12, 0, -5.2453664e-09, 0, -0.5, 0)
 
-[node name="Skeleton3D" parent="Enemy/Armature" parent_id_path=PackedInt32Array(511010101, 1541835374) index="0" unique_id=339976389]
-bones/6/rotation = Quaternion(-0.36042118, -0.223594, 0.28040934, 0.8610882)
-bones/7/rotation = Quaternion(0.1487534, 0.07207483, 0.44150907, 0.8818999)
-bones/10/rotation = Quaternion(0.17762028, -0.3302697, -0.36373115, 0.8526855)
-bones/11/rotation = Quaternion(0.13144943, 0.06643034, -0.32334948, 0.9347477)
-bones/14/rotation = Quaternion(-0.36702427, -0.09426111, -0.26917738, 0.8854104)
-bones/15/rotation = Quaternion(-0.002459348, 0.0015414366, -0.22602683, 0.97411674)
-bones/19/rotation = Quaternion(-0.35845548, -0.11053166, -0.31398407, 0.8721848)
-bones/20/rotation = Quaternion(-0.0005261909, 0.0048046494, 0.3097908, 0.9507925)
-bones/21/rotation = Quaternion(-0.0010600885, -0.00927258, -0.46535516, 0.88507485)
+[node name="Skeleton3D" parent="Enemy/Armature" parent_id_path=PackedInt32Array(511010101, 2010810048) index="0" unique_id=1275159575]
+bones/6/rotation = Quaternion(-0.40988594, -0.24945053, 0.25306702, 0.84007436)
+bones/7/rotation = Quaternion(0.18382862, 0.088200346, 0.464508, 0.8617773)
+bones/10/rotation = Quaternion(0.20182395, -0.36127052, -0.3578322, 0.8370824)
+bones/11/rotation = Quaternion(0.16262147, 0.07133032, -0.3223824, 0.9298042)
+bones/14/rotation = Quaternion(-0.3621225, -0.113128364, -0.3123718, 0.8709152)
+bones/15/rotation = Quaternion(-0.0031188428, 0.001802383, -0.24826232, 0.96868616)
+bones/16/rotation = Quaternion(0.0011980536, 7.5666394e-05, 0.64905006, 0.76074475)
+bones/19/rotation = Quaternion(-0.35504118, -0.122395806, -0.3414704, 0.8616049)
+bones/20/rotation = Quaternion(-0.00142683, 0.0058792, 0.35030845, 0.9366149)
+bones/21/rotation = Quaternion(-0.001573321, -0.011328291, -0.41975647, 0.9075647)
 
 [node name="PoisonParticles" type="GPUParticles3D" parent="." unique_id=1533864931]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8908751, 0)
