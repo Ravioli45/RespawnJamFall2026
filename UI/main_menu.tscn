@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://bvkqcdw12085n" path="res://UI/Menu.png" id="1_p8ccj"]
 [ext_resource type="Script" uid="uid://hbc07r26s8d1" path="res://UI/main_menu.gd" id="1_tk8dj"]
 [ext_resource type="PackedScene" uid="uid://bww7k7fae0r4s" path="res://UI/pause_menu.tscn" id="3_d8nwk"]
+[ext_resource type="AudioStream" uid="uid://bdwsisfkhobky" path="res://Sounds/MenuSong.wav" id="4_4cwpn"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ddld8"]
 font_size = 120
@@ -88,6 +89,10 @@ visible = false
 layout_mode = 1
 grow_horizontal = 1
 grow_vertical = 1
+
+[node name="BGMPlayer" type="AudioStreamPlayer" parent="." unique_id=970544146]
+stream = ExtResource("4_4cwpn")
+autoplay = true
 
 [connection signal="pressed" from="Container/VBoxContainer/VBoxContainer/Play" to="." method="play"]
 [connection signal="pressed" from="Container/VBoxContainer/VBoxContainer/Quit" to="PauseMenu" method="reveal"]

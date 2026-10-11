@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cqsnknyo85lcw" path="res://Enemy/enemy.tscn" id="5_mlntv"]
 [ext_resource type="PackedScene" uid="uid://rxjoqn01nxct" path="res://Casino/table.tscn" id="7_4n4sc"]
 [ext_resource type="PackedScene" uid="uid://52kexqfux4o0" path="res://ModelScenes/black.tscn" id="7_8ymdh"]
+[ext_resource type="AudioStream" uid="uid://bf61m7rjnvaph" path="res://Sounds/MainSong.wav" id="10_2uepv"]
 [ext_resource type="PackedScene" uid="uid://bww7k7fae0r4s" path="res://UI/pause_menu.tscn" id="10_pgii7"]
 
 [sub_resource type="Environment" id="Environment_fjq73"]
@@ -294,6 +295,10 @@ autostart = true
 
 [node name="PauseMenu" parent="." unique_id=1717326633 instance=ExtResource("10_pgii7")]
 visible = false
+
+[node name="BGMPlayer" type="AudioStreamPlayer" parent="." unique_id=1217241458]
+stream = ExtResource("10_2uepv")
+autoplay = true
 
 [connection signal="player_died" from="Player" to="." method="end_game"]
 [connection signal="timeout" from="Timer" to="." method="spawn_enemy"]
