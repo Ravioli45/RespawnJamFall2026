@@ -2,13 +2,16 @@
 
 [ext_resource type="Script" uid="uid://bms5uk47hxl2u" path="res://Interactables/Coin/coin.gd" id="1_lexh4"]
 [ext_resource type="PackedScene" uid="uid://r0ir7nxpg4uo" path="res://ModelScenes/coin.tscn" id="1_yp52d"]
+[ext_resource type="AudioStream" uid="uid://cvwh8p22o8twq" path="res://Sounds/Coin.wav" id="3_58vkw"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_wm55w"]
 height = 0.02
 radius = 0.12
 
-[node name="Coin" type="Node3D" unique_id=1632909294]
+[node name="Coin" type="Node3D" unique_id=1632909294 node_paths=PackedStringArray("collision_area", "coin_audio")]
 script = ExtResource("1_lexh4")
+collision_area = NodePath("Area3D")
+coin_audio = NodePath("AudioStreamPlayer3D")
 rotation_speed = 5.0
 
 [node name="coin" parent="." unique_id=1414749562 instance=ExtResource("1_yp52d")]
@@ -22,4 +25,8 @@ monitorable = false
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
 shape = SubResource("CylinderShape3D_wm55w")
 
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=635484931]
+stream = ExtResource("3_58vkw")
+
 [connection signal="body_entered" from="Area3D" to="." method="_on_body_entered"]
+[connection signal="finished" from="AudioStreamPlayer3D" to="." method="_on_audio_finished"]
