@@ -61,18 +61,23 @@ advance_expression = "state == EnemyState.Attacking"
 switch_mode = 2
 advance_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jovdv"]
+advance_mode = 2
+advance_expression = "state == EnemyState.Dead"
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_wm55w"]
 states/Attack/node = SubResource("AnimationNodeAnimation_0rspp")
 states/Attack/position = Vector2(443, 273)
 states/Death_001/node = SubResource("AnimationNodeAnimation_efk13")
-states/Death_001/position = Vector2(542, 152)
+states/Death_001/position = Vector2(533.2, 144.16)
+states/End/position = Vector2(708, 145.08801)
 states/Hurt/node = SubResource("AnimationNodeAnimation_glvfu")
 states/Hurt/position = Vector2(421, 42)
 states/Run/node = SubResource("AnimationNodeAnimation_am0pq")
 states/Run/position = Vector2(315, 144)
 states/Start/position = Vector2(123, 144)
-transitions = ["Start", "Run", SubResource("AnimationNodeStateMachineTransition_eqilm"), "Run", "Hurt", SubResource("AnimationNodeStateMachineTransition_0rspp"), "Hurt", "Run", SubResource("AnimationNodeStateMachineTransition_efk13"), "Run", "Attack", SubResource("AnimationNodeStateMachineTransition_nmr1a"), "Attack", "Run", SubResource("AnimationNodeStateMachineTransition_47ove")]
-graph_offset = Vector2(-13, 55)
+transitions = ["Start", "Run", SubResource("AnimationNodeStateMachineTransition_eqilm"), "Run", "Hurt", SubResource("AnimationNodeStateMachineTransition_0rspp"), "Hurt", "Run", SubResource("AnimationNodeStateMachineTransition_efk13"), "Run", "Attack", SubResource("AnimationNodeStateMachineTransition_nmr1a"), "Attack", "Run", SubResource("AnimationNodeStateMachineTransition_47ove"), "Run", "Death_001", SubResource("AnimationNodeStateMachineTransition_jovdv")]
+graph_offset = Vector2(-9.263455, 39.267544)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wm55w"]
 radius = 0.15

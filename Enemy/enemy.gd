@@ -3,7 +3,8 @@ extends CharacterBody3D
 enum EnemyState{
 	Running,
 	Attacking,
-	Hurt
+	Hurt,
+	Dead
 }
 
 @export var body: MeshInstance3D
@@ -97,7 +98,10 @@ func _on_died() -> void:
 		new_coin.global_position.x += randf_range(-0.1, 0.1)
 		new_coin.global_position.z += randf_range(-0.1, 0.1)
 	
-	call_deferred("queue_free")
+	call_deferred("kill")
+
+func kill() -> void:
+	state = EnemyState.Dead
 
 
 func _on_hurt() -> void:
@@ -117,4 +121,6 @@ func _on_animation_finished(anim_name: StringName) -> void:
 		await get_tree().physics_frame
 		await get_tree().physics_frame
 		hitbox.monitoring = true
+	elif anim_name == "Death_001":
+		queue_free()
 	pass # Replace with function body.
