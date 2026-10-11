@@ -105,6 +105,7 @@ func freeze() -> void:
 		return
 	
 	body.material_override = frozen_material
+	hitbox.monitoring = false
 	
 	if state != EnemyState.Dead:
 		state = EnemyState.Frozen
