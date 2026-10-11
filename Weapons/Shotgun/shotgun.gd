@@ -6,6 +6,7 @@ signal reloaded
 @export var reload_timer: Timer
 @export var animation_player: AnimationPlayer
 @export var muzzle_particles: GPUParticles3D
+@export var shot_sound: AudioStreamPlayer3D
 
 @export_subgroup("Projectile")
 @export var projectile_spawn_position: Node3D
@@ -29,6 +30,7 @@ func shoot() -> void:
 
 	if projectile and projectile_spawn_position and can_shoot:
 		animation_player.play("Reload")
+		shot_sound.play()
 		muzzle_particles.emitting = true
 		
 		for face in current_faces:

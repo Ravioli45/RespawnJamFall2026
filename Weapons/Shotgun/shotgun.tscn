@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://d13tngttl31m0" path="res://Weapons/Dice/FaceTextures/face_five.png" id="9_rl4sf"]
 [ext_resource type="Texture2D" uid="uid://dqyw2ibe4y6in" path="res://Weapons/Dice/FaceTextures/face_six.png" id="10_uy0yp"]
 [ext_resource type="Resource" uid="uid://c1euvvdbmchir" path="res://Weapons/Dice/default_dice.tres" id="11_v04ei"]
+[ext_resource type="AudioStream" uid="uid://bteghq6k2ag6q" path="res://Sounds/ShotgunAndReload.wav" id="13_lpe6n"]
 
 [sub_resource type="Resource" id="Resource_no02n"]
 script = ExtResource("4_6eg5q")
@@ -84,11 +85,12 @@ material = SubResource("StandardMaterial3D_r7dxm")
 radius = 0.025
 height = 0.05
 
-[node name="Shotgun" type="Node3D" unique_id=784934416 node_paths=PackedStringArray("reload_timer", "animation_player", "muzzle_particles")]
+[node name="Shotgun" type="Node3D" unique_id=784934416 node_paths=PackedStringArray("reload_timer", "animation_player", "muzzle_particles", "shot_sound")]
 script = ExtResource("1_c72ml")
 reload_timer = NodePath("ReloadTimer")
 animation_player = NodePath("Shotgun/AnimationPlayer")
 muzzle_particles = NodePath("Shotgun/Cube/GPUParticles3D")
+shot_sound = NodePath("ShotSound")
 projectile = ExtResource("2_e1bfy")
 spread = 0.2
 dice_data = Array[ExtResource("3_ifwlu")]([SubResource("Resource_2am64")])
@@ -102,7 +104,7 @@ one_shot = true
 [node name="Shotgun" parent="." unique_id=63231070 instance=ExtResource("2_lwqk7")]
 transform = Transform3D(-0.5, 0, -7.54979e-08, 0, 0.5, 0, 7.54979e-08, 0, -0.5, 0, 0, 0)
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="Shotgun/Cube" parent_id_path=PackedInt32Array(63231070, 439382938) index="1" unique_id=413466490]
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Shotgun/Cube" parent_id_path=PackedInt32Array(63231070, 1684836717) index="1" unique_id=413466490]
 transform = Transform3D(-33.333336, 0, 2.9140922e-06, 0, 20, 0, -1.748455e-06, 0, -20, -0.8000594, 1.9829998, 19.865086)
 emitting = false
 lifetime = 0.2
@@ -112,6 +114,9 @@ fixed_fps = 60
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_olvt3")
 draw_pass_1 = SubResource("SphereMesh_wm55w")
+
+[node name="ShotSound" type="AudioStreamPlayer3D" parent="." unique_id=813270633]
+stream = ExtResource("13_lpe6n")
 
 [connection signal="timeout" from="ReloadTimer" to="." method="_on_reload_timeout"]
 

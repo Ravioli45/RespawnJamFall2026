@@ -27,6 +27,7 @@
 [ext_resource type="Texture2D" uid="uid://dguqmtkh0xw3o" path="res://Weapons/Modifiers/Explosion/explosion_purple.png" id="21_kihi1"]
 [ext_resource type="Texture2D" uid="uid://cgeds3cc70tx4" path="res://Weapons/Dice/FaceTextures/face_two_small.png" id="24_fd0yp"]
 [ext_resource type="Texture2D" uid="uid://bitcdssjsnile" path="res://Weapons/Dice/FaceTextures/face_one_small.png" id="26_2rhfl"]
+[ext_resource type="AudioStream" uid="uid://dru64j1l1b6nb" path="res://Sounds/SlotMachineSpin.wav" id="28_s0uif"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_wm55w"]
 size = Vector3(0.36743164, 1.0454102, 0.24365234)
@@ -114,13 +115,14 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="SlotMachine" type="StaticBody3D" unique_id=795938273 node_paths=PackedStringArray("slots", "slot_timer", "animation_player")]
+[node name="SlotMachine" type="StaticBody3D" unique_id=795938273 node_paths=PackedStringArray("slots", "slot_timer", "animation_player", "spin_sound")]
 collision_layer = 48
 collision_mask = 0
 script = ExtResource("1_nl070")
 slots = [NodePath("Slot1"), NodePath("Slot2"), NodePath("Slot3")]
 slot_timer = NodePath("SlotTimer")
 animation_player = NodePath("SlotMachine/AnimationPlayer")
+spin_sound = NodePath("SpinSound")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=289885049]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5270996, 0.0075683594)
@@ -155,6 +157,9 @@ animation = &"spin"
 [node name="SlotTimer" type="Timer" parent="." unique_id=915242293]
 wait_time = 2.0
 one_shot = true
+
+[node name="SpinSound" type="AudioStreamPlayer3D" parent="." unique_id=1896170263]
+stream = ExtResource("28_s0uif")
 
 [connection signal="animation_finished" from="SlotMachine/AnimationPlayer" to="." method="_on_animation_finished"]
 [connection signal="timeout" from="SlotTimer" to="." method="on_slot_timer_finished"]
