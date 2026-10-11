@@ -27,8 +27,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_phit2")
-kill_label = NodePath("Container/VBoxContainer/VBoxContainer/KillLabel")
-time_label = NodePath("Container/VBoxContainer/VBoxContainer/TimeLabel")
+kill_label = NodePath("Container/VBoxContainer/ColorRect/VBoxContainer2/KillLabel")
+time_label = NodePath("Container/VBoxContainer/ColorRect/VBoxContainer2/TimeLabel")
 
 [node name="Container" type="TextureRect" parent="." unique_id=659204948]
 layout_mode = 1
@@ -62,25 +62,6 @@ label_settings = SubResource("LabelSettings_3y5qq")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Container/VBoxContainer" unique_id=258642862]
-layout_mode = 2
-
-[node name="KillLabel" type="Label" parent="Container/VBoxContainer/VBoxContainer" unique_id=1362587869]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 32
-text = "Kills: #"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="TimeLabel" type="Label" parent="Container/VBoxContainer/VBoxContainer" unique_id=1389536536]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 32
-text = "Time Survived: #"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="ColorRect" type="ColorRect" parent="Container/VBoxContainer" unique_id=1708594276]
 custom_minimum_size = Vector2(600, 400)
 layout_mode = 2
@@ -89,12 +70,14 @@ color = Color(1, 1, 1, 0.6392157)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Container/VBoxContainer/ColorRect" unique_id=923784955]
 layout_mode = 1
-anchors_preset = 14
+anchors_preset = -1
 anchor_top = 0.5
 anchor_right = 1.0
-anchor_bottom = 0.5
-offset_top = -79.0
-offset_bottom = 79.0
+anchor_bottom = 0.88500005
+offset_left = 0.45999146
+offset_top = -4.0
+offset_right = 0.45996094
+offset_bottom = -3.0517578e-05
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 20
@@ -118,6 +101,44 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_wruqd")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_phit2")
 theme_override_styles/hover = SubResource("StyleBoxFlat_fmr02")
 text = "Quit"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Container/VBoxContainer/ColorRect" unique_id=258642862]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.13700001
+anchor_right = 1.0
+anchor_bottom = 0.372
+offset_left = 0.45999146
+offset_top = 0.19999695
+offset_right = 0.45996094
+offset_bottom = 0.19999695
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="KillLabel" type="Label" parent="Container/VBoxContainer/ColorRect/VBoxContainer2" unique_id=1362587869]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "Kills: #"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TimeLabel" type="Label" parent="Container/VBoxContainer/ColorRect/VBoxContainer2" unique_id=1389536536]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "Time Survived: #"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayAgain" type="Label" parent="Container/VBoxContainer/ColorRect/VBoxContainer2" unique_id=1701570447]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "Play again to get a better kill count and run time!"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
 
 [node name="PauseMenu" parent="." unique_id=1717326633 instance=ExtResource("2_3y5qq")]
 visible = false

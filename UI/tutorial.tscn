@@ -1,0 +1,91 @@
+[gd_scene format=3 uid="uid://bji067nutk45e"]
+
+[ext_resource type="Texture2D" uid="uid://b8gqtrqxfnatw" path="res://UI/Tutorial.png" id="1_50hb1"]
+[ext_resource type="Script" uid="uid://c0lkoud3r3ii2" path="res://UI/tutorial.gd" id="1_lse7j"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_50hb1"]
+font_size = 80
+outline_size = 40
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_50hb1"]
+bg_color = Color(0, 0.2784314, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lse7j"]
+bg_color = Color(0, 0.15294118, 0.6039216, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c6il8"]
+bg_color = Color(0, 0.15294118, 0.6039216, 1)
+
+[node name="Tutorial" type="Control" unique_id=2044957355]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lse7j")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=291717711]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.018000001
+anchor_top = 0.035
+anchor_right = 0.97700006
+anchor_bottom = 0.96700007
+offset_left = -0.040000916
+offset_top = -8.200001
+offset_right = 0.4399414
+offset_bottom = -0.24005127
+color = Color(0.65882355, 1, 1, 1)
+
+[node name="Container" type="TextureRect" parent="ColorRect" unique_id=1725853029]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -258.5
+offset_bottom = 391.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_50hb1")
+
+[node name="Label" type="Label" parent="ColorRect" unique_id=1631158780]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.017
+anchor_right = 0.5
+anchor_bottom = 0.017
+offset_left = -341.0
+offset_top = -45.543
+offset_right = 344.0
+offset_bottom = 119.457
+grow_horizontal = 2
+size_flags_horizontal = 4
+text = "How to Play"
+label_settings = SubResource("LabelSettings_50hb1")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Close" type="Button" parent="ColorRect" unique_id=174788680]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.418
+anchor_top = 0.92
+anchor_right = 0.54700005
+anchor_bottom = 0.99300003
+offset_left = -0.3040161
+offset_top = 0.32000732
+offset_right = 0.28393555
+offset_bottom = 0.3369751
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_50hb1")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_lse7j")
+theme_override_styles/hover = SubResource("StyleBoxFlat_c6il8")
+text = "Close"
+
+[connection signal="pressed" from="ColorRect/Close" to="." method="close"]

@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://bvkqcdw12085n" path="res://UI/Menu.png" id="1_p8ccj"]
 [ext_resource type="Script" uid="uid://hbc07r26s8d1" path="res://UI/main_menu.gd" id="1_tk8dj"]
 [ext_resource type="PackedScene" uid="uid://bww7k7fae0r4s" path="res://UI/pause_menu.tscn" id="3_d8nwk"]
+[ext_resource type="PackedScene" uid="uid://bji067nutk45e" path="res://UI/tutorial.tscn" id="3_f40uw"]
 [ext_resource type="AudioStream" uid="uid://bdwsisfkhobky" path="res://Sounds/MenuSong.wav" id="4_4cwpn"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ddld8"]
@@ -50,7 +51,7 @@ offset_right = 0.23999023
 offset_bottom = 0.11999512
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 300
+theme_override_constants/separation = 250
 
 [node name="Label" type="Label" parent="Container/VBoxContainer" unique_id=1501469037]
 layout_mode = 2
@@ -74,6 +75,16 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_40tcv")
 theme_override_styles/hover = SubResource("StyleBoxFlat_p8ccj")
 text = "Play"
 
+[node name="Tutorial" type="Button" parent="Container/VBoxContainer/VBoxContainer" unique_id=1027535956]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxFlat_b6c64")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_40tcv")
+theme_override_styles/hover = SubResource("StyleBoxFlat_p8ccj")
+text = "How to Play"
+
 [node name="Quit" type="Button" parent="Container/VBoxContainer/VBoxContainer" unique_id=1831131737]
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
@@ -83,6 +94,10 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_b6c64")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_40tcv")
 theme_override_styles/hover = SubResource("StyleBoxFlat_p8ccj")
 text = "Quit"
+
+[node name="Tutorial" parent="." unique_id=2044957355 instance=ExtResource("3_f40uw")]
+visible = false
+layout_mode = 1
 
 [node name="PauseMenu" parent="." unique_id=1717326633 instance=ExtResource("3_d8nwk")]
 visible = false
@@ -95,4 +110,5 @@ stream = ExtResource("4_4cwpn")
 autoplay = true
 
 [connection signal="pressed" from="Container/VBoxContainer/VBoxContainer/Play" to="." method="play"]
+[connection signal="pressed" from="Container/VBoxContainer/VBoxContainer/Tutorial" to="Tutorial" method="open"]
 [connection signal="pressed" from="Container/VBoxContainer/VBoxContainer/Quit" to="PauseMenu" method="reveal"]
