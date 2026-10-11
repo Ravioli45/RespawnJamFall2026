@@ -25,6 +25,8 @@ enum EnemyState{
 @export var navigation_agent: NavigationAgent3D
 @export var animation_tree: AnimationTree
 
+@export var enemy_collision: CollisionShape3D
+@export var hurtbox: HurtboxComponent
 @export var hitbox: HitboxComponent
 @export var coin_scene: PackedScene
 
@@ -144,6 +146,8 @@ func _on_died() -> void:
 func kill() -> void:
 	state = EnemyState.Dead
 	hitbox.monitoring = false
+	hurtbox.monitorable = false
+	enemy_collision.disabled = true
 
 
 func _on_hurt() -> void:

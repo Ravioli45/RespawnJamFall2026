@@ -133,7 +133,7 @@ size = Vector3(0.3, 0.8903252, 0.539)
 radius = 0.05
 height = 0.1
 
-[node name="Enemy" type="CharacterBody3D" unique_id=1516501594 node_paths=PackedStringArray("body", "freeze_timer", "poison_particles", "poison_timer", "poison_tick_timer", "health_component", "navigation_agent", "animation_tree", "hitbox", "hurt_sound", "attack_sound", "walk_sound", "freeze_sound", "poison_sound")]
+[node name="Enemy" type="CharacterBody3D" unique_id=1516501594 node_paths=PackedStringArray("body", "freeze_timer", "poison_particles", "poison_timer", "poison_tick_timer", "health_component", "navigation_agent", "animation_tree", "enemy_collision", "hurtbox", "hitbox", "hurt_sound", "attack_sound", "walk_sound", "freeze_sound", "poison_sound")]
 collision_layer = 4
 collision_mask = 21
 script = ExtResource("1_px1sc")
@@ -147,6 +147,8 @@ health_component = NodePath("HealthComponent")
 speed = 2.5
 navigation_agent = NodePath("NavigationAgent3D")
 animation_tree = NodePath("AnimationTree")
+enemy_collision = NodePath("EnemyCollision")
+hurtbox = NodePath("HurtboxComponent")
 hitbox = NodePath("HitboxComponent")
 coin_scene = ExtResource("3_0rspp")
 hurt_sound = NodePath("HurtSound")
@@ -163,16 +165,16 @@ shape = SubResource("CapsuleShape3D_am0pq")
 [node name="Enemy" parent="." unique_id=511010101 instance=ExtResource("1_2pb1h")]
 transform = Transform3D(-5.2453664e-09, 0, 0.12, 0, 0.12, 0, -0.12, 0, -5.2453664e-09, 0, -0.5, 0)
 
-[node name="Skeleton3D" parent="Enemy/Armature" parent_id_path=PackedInt32Array(511010101, 1108544954) index="0" unique_id=1070717074]
-bones/6/rotation = Quaternion(0.122951694, 0.14228861, 0.38329795, 0.9042784)
-bones/7/rotation = Quaternion(0.058036365, 0.017574562, 0.32106078, 0.9451153)
-bones/10/rotation = Quaternion(-0.111336745, 0.3083206, -0.4090368, 0.8516053)
-bones/11/rotation = Quaternion(0.121578895, -0.080339625, -0.2563424, 0.9555379)
-bones/14/rotation = Quaternion(-0.36678576, 0.11671491, 0.2383732, 0.89164126)
-bones/15/rotation = Quaternion(0.0079506645, 0.00048337458, -0.18680389, 0.9823649)
-bones/16/rotation = Quaternion(0.005071951, -0.0014979817, 0.5667182, 0.8238947)
-bones/19/rotation = Quaternion(-0.37266883, 0.08265387, 0.15642123, 0.91094387)
-bones/20/rotation = Quaternion(0.001585601, -0.00012216387, 0.17335875, 0.9848575)
+[node name="Skeleton3D" parent="Enemy/Armature" parent_id_path=PackedInt32Array(511010101, 1870900948) index="0" unique_id=1681649260]
+bones/6/rotation = Quaternion(-0.5895939, -0.3345511, 0.12631615, 0.72422296)
+bones/7/rotation = Quaternion(0.33268112, 0.15652981, 0.5510884, 0.7490816)
+bones/10/rotation = Quaternion(0.29518825, -0.46267802, -0.33143115, 0.76742846)
+bones/11/rotation = Quaternion(0.29967546, 0.08228877, -0.31433848, 0.8970031)
+bones/14/rotation = Quaternion(-0.33523238, -0.18401209, -0.4722302, 0.79420245)
+bones/15/rotation = Quaternion(-0.0053805257, 0.002873946, -0.34621125, 0.9381368)
+bones/19/rotation = Quaternion(-0.34050697, -0.1643434, -0.43721363, 0.8160212)
+bones/20/rotation = Quaternion(-0.0053702705, 0.010491412, 0.52136433, 0.8532528)
+bones/21/rotation = Quaternion(-0.003771822, -0.019979477, -0.20720252, 0.9780868)
 
 [node name="PoisonParticles" type="GPUParticles3D" parent="." unique_id=1533864931]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25701106, 0)
