@@ -53,7 +53,7 @@ func _physics_process(delta: float) -> void:
 			# for body in hitbox.get_overlapping_bodies():
 				# pass
 			
-		EnemyState.Attacking, EnemyState.Hurt:
+		EnemyState.Attacking, EnemyState.Hurt, EnemyState.Dead:
 			target_velocity.x = 0
 			target_velocity.y = 0
 	"""
