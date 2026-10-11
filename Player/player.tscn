@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://xv5yv141ixnv" path="res://Components/Hurtbox/hurtbox_component.tscn" id="4_k53q1"]
 [ext_resource type="Texture2D" uid="uid://d32j1eul6aiir" path="res://Player/crosshair.png" id="6_fhl08"]
 [ext_resource type="PackedScene" uid="uid://ctk2ctwsohy6s" path="res://HUD/DiceGrid.tscn" id="7_vtle1"]
+[ext_resource type="AudioStream" uid="uid://bfmdw8t71f5k2" path="res://Sounds/Hurt.wav" id="8_od3ui"]
+[ext_resource type="AudioStream" uid="uid://1emafskpp3hw" path="res://Sounds/Walk.wav" id="9_00tjw"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wm55w"]
 radius = 0.4
@@ -50,17 +52,19 @@ corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 
-[node name="Player" type="CharacterBody3D" unique_id=1423276027 node_paths=PackedStringArray("interact_raycast", "health_bar", "coin_label", "head", "weapon", "dice_grid")]
+[node name="Player" type="CharacterBody3D" unique_id=1423276027 node_paths=PackedStringArray("interact_raycast", "health_bar", "coin_label", "hurt_sound", "head", "walk_sound", "weapon", "dice_grid")]
 collision_mask = 28
 script = ExtResource("1_l8h54")
 interact_raycast = NodePath("RayCast3D")
 coins = 5
 health_bar = NodePath("ProgressBar")
 coin_label = NodePath("CoinLabel")
+hurt_sound = NodePath("HurtSound")
 head = NodePath("Pivot")
 speed = 5.0
 jump_strength = 5.0
 mouse_sensitivity = 0.005
+walk_sound = NodePath("WalkSound")
 weapon = NodePath("Pivot/Shotgun")
 dice_grid = NodePath("PanelContainer/DiceGrid")
 
@@ -154,6 +158,12 @@ theme_override_font_sizes/font_size = 64
 text = "Coins: 0"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="HurtSound" type="AudioStreamPlayer3D" parent="." unique_id=861554998]
+stream = ExtResource("8_od3ui")
+
+[node name="WalkSound" type="AudioStreamPlayer3D" parent="." unique_id=1361477924]
+stream = ExtResource("9_00tjw")
 
 [connection signal="reloaded" from="Pivot/Shotgun" to="." method="_on_reloaded"]
 [connection signal="died" from="HealthComponent" to="." method="_on_died"]

@@ -53,7 +53,7 @@ func _on_sound_finished() -> void:
 	elif rand < 0.9:
 		win_sound.play()
 		var reward: ModifierTable.ModifierFlags= ModifierTable.all.pick_random()
-		# reward = ModifierTable.ModifierFlags.Poison
+		#reward = ModifierTable.ModifierFlags.Explosive
 		match reward:
 			ModifierTable.ModifierFlags.Explosive:
 				for i in range(slots.size()):
@@ -71,6 +71,7 @@ func _on_sound_finished() -> void:
 	else:
 		win_sound.play()
 		if player.weapon.dice_data.size() >= 4:
+			player.coins += 5
 			return
 		player.new_dice()
 		for i in range(slots.size()):

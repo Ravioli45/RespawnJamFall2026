@@ -13,11 +13,14 @@ signal player_died
 @export var health_bar: ProgressBar
 @export var coin_label: Label
 
+@export var hurt_sound: AudioStreamPlayer3D
+
 @export_subgroup("Movement")
 @export var head: Node3D
 @export var speed: float = 0
 @export var jump_strength: float = 0
 @export var mouse_sensitivity: float = 0
+@export var walk_sound: AudioStreamPlayer3D
 
 @export_subgroup("Weapon")
 @export var weapon: Shotgun
@@ -60,10 +63,15 @@ func _physics_process(delta: float) -> void:
 
 	var input_vector: Vector2 = Input.get_vector("left", "right", "forward", "backward")
 	
-	var move_vector: Vector3  = speed * (transform.basis * Vector3(input_vector.x, 0, input_vector.y)).normalized()	
+	var move_vector: Vector3  = speed * (transform.basis * Vector3(input_vector.x, 0, input_vector.y)).normalized()
 	target_velocity.x =  move_vector.x
 	target_velocity.z = move_vector.z
-
+	if target_velocity.x >= 0.05 or target_velocity.z >= 0.05:
+		if not walk_sound.playing:
+			walk_sound.play()
+	else:
+		walk_sound.stop()
+	
 	velocity = target_velocity
 
 func new_dice():
@@ -80,7 +88,8 @@ func _on_died() -> void:
 	player_died.emit()
 
 func _on_health_changed(old_health: int, new_health: int) -> void:
-	# new_dice()
+	if new_health < old_health and not hurt_sound.playing:
+		hurt_sound.play()
 	print("player took " + str(old_health - new_health) + " damage")
 	health_bar.value = new_health
 	# TODO: replace with player take damage logic

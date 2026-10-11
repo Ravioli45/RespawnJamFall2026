@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://cimo47drva1hq"]
+
+[ext_resource type="AudioStream" uid="uid://dmmpwd6jnmvmr" path="res://Sounds/Explosion.wav" id="1_wmiws"]
+
+[node name="ExplosionSound" type="AudioStreamPlayer3D" unique_id=350396205]
+stream = ExtResource("1_wmiws")
+volume_db = 80.0
+unit_size = 100.0

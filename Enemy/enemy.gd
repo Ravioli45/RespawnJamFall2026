@@ -28,6 +28,13 @@ enum EnemyState{
 @export var hitbox: HitboxComponent
 @export var coin_scene: PackedScene
 
+@export var hurt_sound: AudioStreamPlayer3D
+@export var attack_sound: AudioStreamPlayer3D
+@export var walk_sound: AudioStreamPlayer3D
+@export var freeze_sound: AudioStreamPlayer3D
+@export var poison_sound: AudioStreamPlayer3D
+@export var dead_scene: PackedScene
+
 var state: EnemyState = EnemyState.Running
 
 # Called when the node enters the scene tree for the first time.
@@ -82,6 +89,12 @@ func _physics_process(delta: float) -> void:
 			target_velocity.z = nav_velocity.z
 	"""
 	
+	if target_velocity.x >= 0.05 or target_velocity.z >= 0.05:
+		if not walk_sound.playing:
+			walk_sound.play()
+	else:
+		walk_sound.stop()
+	
 	velocity = target_velocity
 
 func freeze() -> void:
@@ -93,11 +106,15 @@ func freeze() -> void:
 	
 	if state != EnemyState.Dead:
 		state = EnemyState.Frozen
+		if not freeze_sound.playing:
+			freeze_sound.play()
 		freeze_timer.start()
 	
 func get_poisoned() -> void:
 	if not poison_particles:
 		return
+	if not poison_sound.playing:
+		poison_sound.play()
 	poison_particles.emitting = true
 	poison_tick_timer.start()
 	poison_timer.start()
@@ -116,6 +133,11 @@ func _on_died() -> void:
 		new_coin.global_position.x += randf_range(-0.1, 0.1)
 		new_coin.global_position.z += randf_range(-0.1, 0.1)
 	
+	var dead_sound = dead_scene.instantiate()
+	get_parent().add_child(dead_sound)
+	dead_sound.global_position = global_position
+	dead_sound.play()
+	
 	call_deferred("kill")
 	#state = EnemyState.Dead
 
@@ -129,6 +151,9 @@ func _on_hurt() -> void:
 	if state == EnemyState.Frozen:
 		return
 	
+	if not hurt_sound.playing:
+		hurt_sound.play()
+	
 	state = EnemyState.Hurt
 	pass # Replace with function body.
 
@@ -136,7 +161,9 @@ func _on_hurt() -> void:
 func _on_hit(_hurtbox: HurtboxComponent) -> void:
 	if state == EnemyState.Frozen:
 		return
-		
+	
+	if not attack_sound.playing:
+		attack_sound.play()
 	state = EnemyState.Attacking
 
 func _on_animation_finished(anim_name: StringName) -> void:
@@ -172,4 +199,8 @@ func _on_poison_timout() -> void:
 
 func _on_poison_tick_stimeout() -> void:
 	health_component.take_damage(5)
+	pass # Replace with function body.
+
+
+func _on_death_sound_finished() -> void:
 	pass # Replace with function body.

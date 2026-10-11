@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://cdujsa4gfjf3i"]
+
+[ext_resource type="AudioStream" uid="uid://p4cwfroxx3tp" path="res://Sounds/EnemyDeath.wav" id="1_0r31a"]
+[ext_resource type="Script" uid="uid://de2x6f6xvjuqs" path="res://Enemy/enemy_death.gd" id="2_vcsbb"]
+
+[node name="EnemyDeath" type="AudioStreamPlayer3D" unique_id=252855777]
+stream = ExtResource("1_0r31a")
+script = ExtResource("2_vcsbb")
+
+[connection signal="finished" from="." to="." method="_die"]

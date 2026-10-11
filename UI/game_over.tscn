@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://bvkqcdw12085n" path="res://UI/Menu.png" id="1_jawqf"]
 [ext_resource type="Script" uid="uid://hbc07r26s8d1" path="res://UI/main_menu.gd" id="1_wruqd"]
 [ext_resource type="PackedScene" uid="uid://bww7k7fae0r4s" path="res://UI/pause_menu.tscn" id="2_3y5qq"]
+[ext_resource type="AudioStream" uid="uid://rq6udqt1xj60" path="res://Sounds/GameOver.wav" id="4_phit2"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_3y5qq"]
 font_size = 120
@@ -109,6 +110,10 @@ offset_left = -0.6000061
 offset_top = -0.07998657
 offset_right = 0.6000061
 offset_bottom = 0.07998657
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=876573756]
+stream = ExtResource("4_phit2")
+autoplay = true
 
 [connection signal="button_down" from="Container/VBoxContainer/ColorRect/VBoxContainer/Play" to="." method="play"]
 [connection signal="pressed" from="Container/VBoxContainer/ColorRect/VBoxContainer/Quit" to="PauseMenu" method="reveal"]

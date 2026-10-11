@@ -4,10 +4,16 @@
 [ext_resource type="Script" uid="uid://bpku7rqjlql2r" path="res://Enemy/enemy.gd" id="1_px1sc"]
 [ext_resource type="Material" uid="uid://xog4rh7dniey" path="res://Enemy/frozen_material.tres" id="2_am0pq"]
 [ext_resource type="PackedScene" uid="uid://dip8ma4ltw66k" path="res://Interactables/Coin/coin.tscn" id="3_0rspp"]
+[ext_resource type="PackedScene" uid="uid://cdujsa4gfjf3i" path="res://Enemy/enemy_death.tscn" id="4_ht3ht"]
 [ext_resource type="Script" uid="uid://bd1oo4b6c1b01" path="res://Components/Health/health_component.gd" id="4_ncf7h"]
 [ext_resource type="PackedScene" uid="uid://xv5yv141ixnv" path="res://Components/Hurtbox/hurtbox_component.tscn" id="5_m6jha"]
 [ext_resource type="PackedScene" uid="uid://cs7tjf8qwgqng" path="res://Components/Velocity/velocity_component.tscn" id="6_m6jha"]
 [ext_resource type="PackedScene" uid="uid://bb4xkujym618n" path="res://Components/Hitbox/hitbox_component.tscn" id="7_glvfu"]
+[ext_resource type="AudioStream" uid="uid://bfmdw8t71f5k2" path="res://Sounds/Hurt.wav" id="9_efk13"]
+[ext_resource type="AudioStream" uid="uid://b1xa8vne35s1l" path="res://Sounds/EnemyAttack.wav" id="10_nmr1a"]
+[ext_resource type="AudioStream" uid="uid://cwgvvliclxsnm" path="res://Sounds/Freeze.wav" id="11_jovdv"]
+[ext_resource type="AudioStream" uid="uid://752jcc5qxujg" path="res://Sounds/Poison.wav" id="12_ht3ht"]
+[ext_resource type="AudioStream" uid="uid://1emafskpp3hw" path="res://Sounds/Walk.wav" id="14_rdorl"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_am0pq"]
 radius = 0.1
@@ -127,7 +133,7 @@ size = Vector3(0.3, 0.8903252, 0.539)
 radius = 0.05
 height = 0.1
 
-[node name="Enemy" type="CharacterBody3D" unique_id=1516501594 node_paths=PackedStringArray("body", "freeze_timer", "poison_particles", "poison_timer", "poison_tick_timer", "health_component", "navigation_agent", "animation_tree", "hitbox")]
+[node name="Enemy" type="CharacterBody3D" unique_id=1516501594 node_paths=PackedStringArray("body", "freeze_timer", "poison_particles", "poison_timer", "poison_tick_timer", "health_component", "navigation_agent", "animation_tree", "hitbox", "hurt_sound", "attack_sound", "walk_sound", "freeze_sound", "poison_sound")]
 collision_layer = 4
 collision_mask = 21
 script = ExtResource("1_px1sc")
@@ -143,6 +149,12 @@ navigation_agent = NodePath("NavigationAgent3D")
 animation_tree = NodePath("AnimationTree")
 hitbox = NodePath("HitboxComponent")
 coin_scene = ExtResource("3_0rspp")
+hurt_sound = NodePath("HurtSound")
+attack_sound = NodePath("AttackSound")
+walk_sound = NodePath("WalkSound")
+freeze_sound = NodePath("FreezeSound")
+poison_sound = NodePath("PoisonSound")
+dead_scene = ExtResource("4_ht3ht")
 
 [node name="EnemyCollision" type="CollisionShape3D" parent="." unique_id=875853842]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.004802108, 0)
@@ -151,16 +163,16 @@ shape = SubResource("CapsuleShape3D_am0pq")
 [node name="Enemy" parent="." unique_id=511010101 instance=ExtResource("1_2pb1h")]
 transform = Transform3D(-5.2453664e-09, 0, 0.12, 0, 0.12, 0, -0.12, 0, -5.2453664e-09, 0, -0.5, 0)
 
-[node name="Skeleton3D" parent="Enemy/Armature" parent_id_path=PackedInt32Array(511010101, 1870900948) index="0" unique_id=1681649260]
-bones/6/rotation = Quaternion(0.2030568, 0.30078927, 0.3663023, 0.8568059)
-bones/7/rotation = Quaternion(0.24802312, 0.06822007, 0.31717676, 0.9128141)
-bones/10/rotation = Quaternion(-0.20260468, 0.7043757, -0.41752222, 0.5371048)
-bones/11/rotation = Quaternion(0.49192432, -0.19408298, -0.01742641, 0.84855086)
-bones/14/rotation = Quaternion(-0.34674805, 0.17806543, 0.39960712, 0.82968235)
-bones/15/rotation = Quaternion(0.013462892, 0.0028274818, -0.3600741, 0.93282235)
-bones/16/rotation = Quaternion(0.016136141, -0.006028143, 0.28878492, 0.95723903)
-bones/19/rotation = Quaternion(-0.34376064, 0.18160471, 0.4134642, 0.82334423)
-bones/20/rotation = Quaternion(-0.0037705828, -0.00047552545, 0.30901423, 0.9510499)
+[node name="Skeleton3D" parent="Enemy/Armature" parent_id_path=PackedInt32Array(511010101, 1108544954) index="0" unique_id=1070717074]
+bones/6/rotation = Quaternion(0.122951694, 0.14228861, 0.38329795, 0.9042784)
+bones/7/rotation = Quaternion(0.058036365, 0.017574562, 0.32106078, 0.9451153)
+bones/10/rotation = Quaternion(-0.111336745, 0.3083206, -0.4090368, 0.8516053)
+bones/11/rotation = Quaternion(0.121578895, -0.080339625, -0.2563424, 0.9555379)
+bones/14/rotation = Quaternion(-0.36678576, 0.11671491, 0.2383732, 0.89164126)
+bones/15/rotation = Quaternion(0.0079506645, 0.00048337458, -0.18680389, 0.9823649)
+bones/16/rotation = Quaternion(0.005071951, -0.0014979817, 0.5667182, 0.8238947)
+bones/19/rotation = Quaternion(-0.37266883, 0.08265387, 0.15642123, 0.91094387)
+bones/20/rotation = Quaternion(0.001585601, -0.00012216387, 0.17335875, 0.9848575)
 
 [node name="PoisonParticles" type="GPUParticles3D" parent="." unique_id=1533864931]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25701106, 0)
@@ -222,6 +234,21 @@ wait_time = 5.0
 one_shot = true
 
 [node name="PoisonTickTimer" type="Timer" parent="." unique_id=1408893459]
+
+[node name="HurtSound" type="AudioStreamPlayer3D" parent="." unique_id=2019645801]
+stream = ExtResource("9_efk13")
+
+[node name="AttackSound" type="AudioStreamPlayer3D" parent="." unique_id=256711142]
+stream = ExtResource("10_nmr1a")
+
+[node name="FreezeSound" type="AudioStreamPlayer3D" parent="." unique_id=1013129726]
+stream = ExtResource("11_jovdv")
+
+[node name="PoisonSound" type="AudioStreamPlayer3D" parent="." unique_id=1735727385]
+stream = ExtResource("12_ht3ht")
+
+[node name="WalkSound" type="AudioStreamPlayer3D" parent="." unique_id=40127956]
+stream = ExtResource("14_rdorl")
 
 [connection signal="animation_finished" from="AnimationTree" to="." method="_on_animation_finished"]
 [connection signal="died" from="HealthComponent" to="." method="_on_died"]

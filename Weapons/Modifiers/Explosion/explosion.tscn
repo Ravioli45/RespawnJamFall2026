@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cykyns1del5no" path="res://Weapons/Modifiers/Explosion/explosion.gd" id="1_1v6u0"]
 [ext_resource type="PackedScene" uid="uid://mhwknwcd76j1" path="res://ModelScenes/explosion.tscn" id="1_x7gaw"]
+[ext_resource type="PackedScene" uid="uid://cimo47drva1hq" path="res://Weapons/Modifiers/Explosion/explosion_sound.tscn" id="2_q3wvy"]
 [ext_resource type="PackedScene" uid="uid://bb4xkujym618n" path="res://Components/Hitbox/hitbox_component.tscn" id="2_sl6nq"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_wm55w"]
@@ -9,6 +10,7 @@ radius = 1.5
 
 [node name="Explosion" type="Node3D" unique_id=946077276]
 script = ExtResource("1_1v6u0")
+explosion_scene = ExtResource("2_q3wvy")
 
 [node name="HitboxComponent" parent="." unique_id=1599040273 instance=ExtResource("2_sl6nq")]
 collision_mask = 4
