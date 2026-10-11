@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c2waut6v2tex6"]
 
 [ext_resource type="Texture2D" uid="uid://bvkqcdw12085n" path="res://UI/Menu.png" id="1_jawqf"]
-[ext_resource type="Script" uid="uid://hbc07r26s8d1" path="res://UI/main_menu.gd" id="1_wruqd"]
+[ext_resource type="Script" uid="uid://oj0m6e2v8wch" path="res://UI/game_over.gd" id="1_phit2"]
 [ext_resource type="PackedScene" uid="uid://bww7k7fae0r4s" path="res://UI/pause_menu.tscn" id="2_3y5qq"]
 [ext_resource type="AudioStream" uid="uid://rq6udqt1xj60" path="res://Sounds/GameOver.wav" id="4_phit2"]
 
@@ -19,14 +19,16 @@ bg_color = Color(0, 0.15294118, 0.6039216, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fmr02"]
 bg_color = Color(0, 0.15294118, 0.6039216, 1)
 
-[node name="GameOver" type="Control" unique_id=1105480346]
+[node name="GameOver" type="Control" unique_id=1105480346 node_paths=PackedStringArray("kill_label", "time_label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_wruqd")
+script = ExtResource("1_phit2")
+kill_label = NodePath("Container/VBoxContainer/VBoxContainer/KillLabel")
+time_label = NodePath("Container/VBoxContainer/VBoxContainer/TimeLabel")
 
 [node name="Container" type="TextureRect" parent="." unique_id=659204948]
 layout_mode = 1
@@ -57,6 +59,25 @@ layout_mode = 2
 size_flags_horizontal = 4
 text = "Game Over"
 label_settings = SubResource("LabelSettings_3y5qq")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Container/VBoxContainer" unique_id=258642862]
+layout_mode = 2
+
+[node name="KillLabel" type="Label" parent="Container/VBoxContainer/VBoxContainer" unique_id=1362587869]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "Kills: #"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TimeLabel" type="Label" parent="Container/VBoxContainer/VBoxContainer" unique_id=1389536536]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "Time Survived: #"
 horizontal_alignment = 1
 vertical_alignment = 1
 

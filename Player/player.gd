@@ -12,6 +12,8 @@ signal player_died
 # @export var health: HealthComponent
 @export var health_bar: ProgressBar
 @export var coin_label: Label
+@export var time_label: Label
+@export var kill_label: Label
 
 @export var hurt_sound: AudioStreamPlayer3D
 
@@ -27,6 +29,8 @@ signal player_died
 
 @export_subgroup("Dice")
 @export var dice_grid: DiceGrid
+
+# var time_alive: float = 0.0
 
 func _ready() -> void:
 	coins = coins
@@ -50,6 +54,15 @@ func _unhandled_input(event: InputEvent) -> void:
 			# coins -= 5
 			interactable.interact(self)
 			# TODO: update HUD
+
+func _process(delta: float) -> void:
+	# time_alive += delta
+	KillCounter.time_alive += delta
+	var time_alive = KillCounter.time_alive
+
+	var seconds = str(floori(fmod(time_alive, 60.0))).pad_zeros(2)
+	time_label.text = str(floori(time_alive / 60)) + ":" + seconds
+	kill_label.text = "Kills: " + str(KillCounter.kill_count)
 
 func _physics_process(delta: float) -> void:
 	var target_velocity = Vector3(0, velocity.y, 0)

@@ -52,13 +52,15 @@ corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 
-[node name="Player" type="CharacterBody3D" unique_id=1423276027 node_paths=PackedStringArray("interact_raycast", "health_bar", "coin_label", "hurt_sound", "head", "walk_sound", "weapon", "dice_grid")]
+[node name="Player" type="CharacterBody3D" unique_id=1423276027 node_paths=PackedStringArray("interact_raycast", "health_bar", "coin_label", "time_label", "kill_label", "hurt_sound", "head", "walk_sound", "weapon", "dice_grid")]
 collision_mask = 28
 script = ExtResource("1_l8h54")
 interact_raycast = NodePath("RayCast3D")
 coins = 5
 health_bar = NodePath("ProgressBar")
 coin_label = NodePath("CoinLabel")
+time_label = NodePath("TimeLabel")
+kill_label = NodePath("KillLabel")
 hurt_sound = NodePath("HurtSound")
 head = NodePath("Pivot")
 speed = 5.0
@@ -156,6 +158,33 @@ offset_bottom = 87.0
 grow_horizontal = 0
 theme_override_font_sizes/font_size = 64
 text = "Coins: 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="KillLabel" type="Label" parent="." unique_id=171751522]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -419.0
+offset_top = 88.0
+offset_bottom = 176.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 64
+text = "Kills: #"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="TimeLabel" type="Label" parent="." unique_id=1783245607]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -169.0
+offset_right = 169.0
+offset_bottom = 88.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 64
+text = "0:00"
 horizontal_alignment = 1
 vertical_alignment = 1
 

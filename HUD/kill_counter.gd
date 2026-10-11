@@ -1,6 +1,7 @@
 extends Node
 
 var kill_count: int = 0
+var time_alive: float = 0.0
 var max_kills: int = 0;
 
 func increase_kills() -> void:
