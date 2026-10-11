@@ -2,7 +2,7 @@ class_name HealthComponent
 extends Node
 
 signal died
-signal health_changed(old_health, new_health)
+signal health_changed(old_health: int, new_health: int)
 
 @export var health: int = 10
 

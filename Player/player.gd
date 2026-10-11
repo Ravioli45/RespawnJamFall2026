@@ -4,8 +4,14 @@ extends CharacterBody3D
 signal player_died
 
 @export var interact_raycast: RayCast3D
-@export var coins: int = 0
-@export var health: HealthComponent
+@export var coins: int = 0:
+	set(value):
+		coins = value
+		if is_instance_valid(coin_label):
+			coin_label.text = "Coins: " + str(coins)
+# @export var health: HealthComponent
+@export var health_bar: ProgressBar
+@export var coin_label: Label
 
 @export_subgroup("Movement")
 @export var head: Node3D
@@ -36,8 +42,10 @@ func _unhandled_input(event: InputEvent) -> void:
 	elif event.is_action_pressed("interact") and is_instance_valid(interact_raycast):
 		# print("p")
 		var interactable := interact_raycast.get_collider()
-		if interactable is SlotMachine:
-			interactable.interact()
+		if interactable is SlotMachine and coins >= 5:
+			coins -= 5
+			interactable.interact(self)
+			# TODO: update HUD
 
 func _physics_process(delta: float) -> void:
 	var target_velocity = Vector3(0, velocity.y, 0)
@@ -57,12 +65,18 @@ func _physics_process(delta: float) -> void:
 
 	velocity = target_velocity
 
+func new_dice():
+	weapon.add_dice()
+	dice_grid.add_dice(weapon.dice_data[-1].faces[0])
+
 func _on_died() -> void:
 	print("player died")
 	player_died.emit()
 
-func _on_health_changed(old_health: Variant, new_health: Variant) -> void:
+func _on_health_changed(old_health: int, new_health: int) -> void:
+	# new_dice()
 	print("player took " + str(old_health - new_health) + " damage")
+	health_bar.value = new_health
 	# TODO: replace with player take damage logic
 
 func _on_reloaded():

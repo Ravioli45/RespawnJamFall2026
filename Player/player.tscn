@@ -15,6 +15,30 @@ height = 1.0
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_olvt3"]
 height = 1.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_od3ui"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(0.078431375, 0.078431375, 0.078431375, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_00tjw"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(3.6338718e-06, 0.64369804, 0, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 6
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vtle1"]
 content_margin_left = 0.0
 content_margin_top = 0.0
@@ -26,11 +50,12 @@ corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 
-[node name="Player" type="CharacterBody3D" unique_id=1423276027 node_paths=PackedStringArray("interact_raycast", "health", "head", "weapon", "dice_grid")]
+[node name="Player" type="CharacterBody3D" unique_id=1423276027 node_paths=PackedStringArray("interact_raycast", "health_bar", "coin_label", "head", "weapon", "dice_grid")]
 collision_mask = 28
 script = ExtResource("1_l8h54")
 interact_raycast = NodePath("RayCast3D")
-health = NodePath("HealthComponent")
+health_bar = NodePath("ProgressBar")
+coin_label = NodePath("CoinLabel")
 head = NodePath("Pivot")
 speed = 5.0
 jump_strength = 5.0
@@ -91,6 +116,15 @@ scale = Vector2(0.3, 0.3)
 pivot_offset = Vector2(32, 32)
 texture = ExtResource("6_fhl08")
 
+[node name="ProgressBar" type="ProgressBar" parent="." unique_id=1792179860]
+offset_right = 419.0
+offset_bottom = 87.0
+theme_override_styles/background = SubResource("StyleBoxFlat_od3ui")
+theme_override_styles/fill = SubResource("StyleBoxFlat_00tjw")
+max_value = 10.0
+value = 10.0
+show_percentage = false
+
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=933332466]
 clip_children = 1
 anchors_preset = 2
@@ -106,6 +140,18 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_vtle1")
 
 [node name="DiceGrid" parent="PanelContainer" unique_id=33086084 instance=ExtResource("7_vtle1")]
 layout_mode = 2
+
+[node name="CoinLabel" type="Label" parent="." unique_id=204470819]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -419.0
+offset_bottom = 87.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 64
+text = "Coins: 0"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="reloaded" from="Pivot/Shotgun" to="." method="_on_reloaded"]
 [connection signal="died" from="HealthComponent" to="." method="_on_died"]

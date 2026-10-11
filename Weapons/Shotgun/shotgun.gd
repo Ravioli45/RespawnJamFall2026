@@ -55,6 +55,11 @@ func choose_faces() -> void:
 	for die in dice_data:
 		current_faces.append(die.faces.pick_random())
 
+func add_dice():
+	var new_dice := default_dice.duplicate(true) as DieData
+	dice_data.append(new_dice)
+	current_faces.append(new_dice.faces[0])
+
 func _on_reload_timeout() -> void:
 	choose_faces()
 	reloaded.emit()
