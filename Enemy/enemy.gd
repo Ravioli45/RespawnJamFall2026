@@ -1,19 +1,25 @@
+class_name Enemy
 extends CharacterBody3D
+
+signal enemy_killed
 
 enum EnemyState{
 	Running,
 	Attacking,
 	Hurt,
-	Dead
+	Dead,
+	Frozen
 }
 
 @export var body: MeshInstance3D
 @export var frozen_material:  StandardMaterial3D
+@export var freeze_timer: Timer
 @export var poison_particles: GPUParticles3D
 
 @export var player: Player
 @export var speed: float = 1
 @export var navigation_agent: NavigationAgent3D
+@export var animation_tree: AnimationTree
 
 @export var hitbox: HitboxComponent
 @export var coin_scene: PackedScene
@@ -53,7 +59,7 @@ func _physics_process(delta: float) -> void:
 			# for body in hitbox.get_overlapping_bodies():
 				# pass
 			
-		EnemyState.Attacking, EnemyState.Hurt, EnemyState.Dead:
+		EnemyState.Attacking, EnemyState.Hurt, EnemyState.Dead, EnemyState.Frozen:
 			target_velocity.x = 0
 			target_velocity.y = 0
 	"""
@@ -78,8 +84,13 @@ func freeze() -> void:
 	#TODO pause animation
 	if not frozen_material:
 		return
+	
 	body.material_override = frozen_material
-
+	
+	if state != EnemyState.Dead:
+		state = EnemyState.Frozen
+		freeze_timer.start()
+	
 func get_poisoned() -> void:
 	if not poison_particles:
 		return
@@ -88,6 +99,7 @@ func get_poisoned() -> void:
 
 func _on_died() -> void:
 	print("enemy died")
+	enemy_killed.emit()
 	var coins_dropped := randi_range(1, 3)
 	
 	for i in range(coins_dropped):
@@ -99,6 +111,7 @@ func _on_died() -> void:
 		new_coin.global_position.z += randf_range(-0.1, 0.1)
 	
 	call_deferred("kill")
+	#state = EnemyState.Dead
 
 func kill() -> void:
 	state = EnemyState.Dead
@@ -106,16 +119,22 @@ func kill() -> void:
 
 func _on_hurt() -> void:
 	print("enemy hurt")
+	if state == EnemyState.Frozen:
+		return
+	
 	state = EnemyState.Hurt
 	pass # Replace with function body.
 
 
 func _on_hit(_hurtbox: HurtboxComponent) -> void:
+	if state == EnemyState.Frozen:
+		return
+		
 	state = EnemyState.Attacking
 
 func _on_animation_finished(anim_name: StringName) -> void:
 	print(anim_name)
-	if anim_name == "Hurt" or anim_name == "Attack":
+	if (anim_name == "Hurt" or anim_name == "Attack" or anim_name == "Idle") and state != EnemyState.Dead:
 		state = EnemyState.Running
 		hitbox.monitoring = false
 		await get_tree().physics_frame
@@ -124,3 +143,15 @@ func _on_animation_finished(anim_name: StringName) -> void:
 	elif anim_name == "Death_001":
 		queue_free()
 	pass # Replace with function body.
+
+
+func _on_freeze_timeout() -> void:
+	body.material_override = null
+	if state != EnemyState.Dead:
+		state = EnemyState.Running
+		hitbox.monitoring = false
+		await get_tree().physics_frame
+		await get_tree().physics_frame
+		hitbox.monitoring = true
+		
+	#pass # Replace with function body.

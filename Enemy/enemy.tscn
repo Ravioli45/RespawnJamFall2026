@@ -39,6 +39,9 @@ animation = &"Death_001"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_glvfu"]
 animation = &"Hurt"
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_nmr1a"]
+animation = &"Idle"
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_am0pq"]
 animation = &"Run"
 
@@ -69,19 +72,49 @@ advance_expression = "state == EnemyState.Dead"
 switch_mode = 2
 advance_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rdorl"]
+advance_mode = 2
+advance_expression = "state == EnemyState.Dead"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1w3kn"]
+advance_mode = 2
+advance_expression = "state == EnemyState.Dead"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mqp78"]
+advance_mode = 2
+advance_expression = "state == EnemyState.Frozen"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sbh3k"]
+advance_mode = 2
+advance_expression = "state == EnemyState.Frozen"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3cio7"]
+advance_mode = 2
+advance_expression = "state == EnemyState.Frozen"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2fgfm"]
+advance_mode = 2
+advance_expression = "state == EnemyState.Dead"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_llu5w"]
+advance_mode = 2
+advance_expression = "state != EnemyState.Frozen"
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_wm55w"]
 states/Attack/node = SubResource("AnimationNodeAnimation_0rspp")
 states/Attack/position = Vector2(443, 273)
 states/Death_001/node = SubResource("AnimationNodeAnimation_efk13")
-states/Death_001/position = Vector2(533.2, 144.16)
+states/Death_001/position = Vector2(546.2, 85.16)
 states/End/position = Vector2(708, 145.08801)
 states/Hurt/node = SubResource("AnimationNodeAnimation_glvfu")
-states/Hurt/position = Vector2(421, 42)
+states/Hurt/position = Vector2(354, 5)
+states/Idle/node = SubResource("AnimationNodeAnimation_nmr1a")
+states/Idle/position = Vector2(368.73654, 168.26755)
 states/Run/node = SubResource("AnimationNodeAnimation_am0pq")
-states/Run/position = Vector2(315, 144)
-states/Start/position = Vector2(123, 144)
-transitions = ["Start", "Run", SubResource("AnimationNodeStateMachineTransition_eqilm"), "Run", "Hurt", SubResource("AnimationNodeStateMachineTransition_0rspp"), "Hurt", "Run", SubResource("AnimationNodeStateMachineTransition_efk13"), "Run", "Attack", SubResource("AnimationNodeStateMachineTransition_nmr1a"), "Attack", "Run", SubResource("AnimationNodeStateMachineTransition_47ove"), "Run", "Death_001", SubResource("AnimationNodeStateMachineTransition_jovdv"), "Death_001", "End", SubResource("AnimationNodeStateMachineTransition_ht3ht")]
-graph_offset = Vector2(-9.263455, 39.267544)
+states/Run/position = Vector2(150, 143)
+states/Start/position = Vector2(-12, 144.40802)
+transitions = ["Start", "Run", SubResource("AnimationNodeStateMachineTransition_eqilm"), "Run", "Hurt", SubResource("AnimationNodeStateMachineTransition_0rspp"), "Hurt", "Run", SubResource("AnimationNodeStateMachineTransition_efk13"), "Run", "Attack", SubResource("AnimationNodeStateMachineTransition_nmr1a"), "Attack", "Run", SubResource("AnimationNodeStateMachineTransition_47ove"), "Run", "Death_001", SubResource("AnimationNodeStateMachineTransition_jovdv"), "Death_001", "End", SubResource("AnimationNodeStateMachineTransition_ht3ht"), "Hurt", "Death_001", SubResource("AnimationNodeStateMachineTransition_rdorl"), "Attack", "Death_001", SubResource("AnimationNodeStateMachineTransition_1w3kn"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_mqp78"), "Hurt", "Idle", SubResource("AnimationNodeStateMachineTransition_sbh3k"), "Attack", "Idle", SubResource("AnimationNodeStateMachineTransition_3cio7"), "Idle", "Death_001", SubResource("AnimationNodeStateMachineTransition_2fgfm"), "Idle", "Run", SubResource("AnimationNodeStateMachineTransition_llu5w")]
+graph_offset = Vector2(-140.26346, -13.732452)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wm55w"]
 radius = 0.15
@@ -94,15 +127,17 @@ size = Vector3(0.3, 0.8903252, 0.539)
 radius = 0.05
 height = 0.1
 
-[node name="Enemy" type="CharacterBody3D" unique_id=1516501594 node_paths=PackedStringArray("body", "poison_particles", "navigation_agent", "hitbox")]
+[node name="Enemy" type="CharacterBody3D" unique_id=1516501594 node_paths=PackedStringArray("body", "freeze_timer", "poison_particles", "navigation_agent", "animation_tree", "hitbox")]
 collision_layer = 4
 collision_mask = 21
 script = ExtResource("1_px1sc")
 body = NodePath("Enemy/Armature/Skeleton3D/Cylinder_004")
 frozen_material = ExtResource("2_am0pq")
+freeze_timer = NodePath("FreezeTimer")
 poison_particles = NodePath("PoisonParticles")
 speed = 2.5
 navigation_agent = NodePath("NavigationAgent3D")
+animation_tree = NodePath("AnimationTree")
 hitbox = NodePath("HitboxComponent")
 coin_scene = ExtResource("3_0rspp")
 
@@ -113,7 +148,7 @@ shape = SubResource("CapsuleShape3D_am0pq")
 [node name="Enemy" parent="." unique_id=511010101 instance=ExtResource("1_2pb1h")]
 transform = Transform3D(-5.2453664e-09, 0, 0.12, 0, 0.12, 0, -0.12, 0, -5.2453664e-09, 0, -0.5, 0)
 
-[node name="Skeleton3D" parent="Enemy/Armature" parent_id_path=PackedInt32Array(511010101, 1798486498) index="0" unique_id=1978410577]
+[node name="Skeleton3D" parent="Enemy/Armature" parent_id_path=PackedInt32Array(511010101, 246214325) index="0" unique_id=1037917352]
 bones/1/rotation = Quaternion(0, -0.0044641364, 0, 0.99999005)
 bones/6/rotation = Quaternion(0.0022091423, -8.6519194e-08, -0.09167956, 0.99578613)
 bones/7/rotation = Quaternion(-1.737696e-06, -3.399256e-08, 7.212354e-05, 1)
@@ -181,9 +216,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.32449764, 0.3409164, 0)
 visible = false
 mesh = SubResource("SphereMesh_wm55w")
 
+[node name="FreezeTimer" type="Timer" parent="." unique_id=1494552234]
+wait_time = 2.0
+one_shot = true
+
 [connection signal="animation_finished" from="AnimationTree" to="." method="_on_animation_finished"]
 [connection signal="died" from="HealthComponent" to="." method="_on_died"]
 [connection signal="hurt" from="HurtboxComponent" to="." method="_on_hurt"]
 [connection signal="hit" from="HitboxComponent" to="." method="_on_hit"]
+[connection signal="timeout" from="FreezeTimer" to="." method="_on_freeze_timeout"]
 
 [editable path="Enemy"]

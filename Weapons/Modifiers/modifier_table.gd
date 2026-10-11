@@ -7,17 +7,21 @@ extends Node
 
 enum ModifierFlags{
 	Explosive = 1 << 0,
-	Freezing = 1 << 1
+	Freezing = 1 << 1,
+	Poison = 1 << 2,
 }
 
-var all: Array[ModifierFlags] = [ModifierFlags.Explosive]
+var all: Array[ModifierFlags] = [ModifierFlags.Explosive, ModifierFlags.Freezing]
 
 var modifiers: Dictionary[ModifierFlags, Callable]
 var sprites: Dictionary[ModifierFlags, Texture2D]
 
 func _ready() -> void:
 	modifiers[ModifierFlags.Explosive] = explosive_affect
+	modifiers[ModifierFlags.Freezing] = freeze_effect
+	
 	sprites[ModifierFlags.Explosive] = explosion_sprite
+	sprites[ModifierFlags.Freezing] = freeze_sprite
 
 # all effects will need this same function signature
 func explosive_affect(bullet: Node3D, hurtbox: HurtboxComponent) -> void:
@@ -26,3 +30,10 @@ func explosive_affect(bullet: Node3D, hurtbox: HurtboxComponent) -> void:
 	bullet.get_parent().add_child(new_explosion)
 	new_explosion.global_position = bullet.global_position
 	
+func freeze_effect(bullet: Node3D, hurtbox: HurtboxComponent) -> void:
+	print("freeze effect")
+	var parent := hurtbox.get_parent()
+
+	if parent is Enemy:
+		parent = parent as Enemy
+		parent.freeze()

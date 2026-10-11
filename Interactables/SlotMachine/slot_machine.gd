@@ -50,6 +50,11 @@ func interact(player: Player) -> void:
 				for i in range(slots.size()):
 					slots[i].frame = 15
 				player.new_modifier(reward)
+			ModifierTable.ModifierFlags.Freezing:
+				for i in range(slots.size()):
+					slots[i].frame = 8
+				player.new_modifier(reward)
+			
 			_:
 				pass
 	else:
